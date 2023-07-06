@@ -1,13 +1,23 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { styled } from 'styled-components';
 
-function App() {
+const AppWrapper = styled.div`
+  height: 100dvh;
+  max-width: var(--app-max-width, 76.8rem);
+  margin: 0 auto;
+  background-color: white;
+`;
+
+const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/recommend" element={<div>recommend</div>} />
-      </Routes>
-    </BrowserRouter>
+    <AppWrapper>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/recommend" element={<div>recommend</div>} />
+        </Routes>
+      </BrowserRouter>
+    </AppWrapper>
   );
-}
+};
 
 export default App;
