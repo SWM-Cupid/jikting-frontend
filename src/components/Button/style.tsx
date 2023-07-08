@@ -6,3 +6,9 @@ export const StyledButton = styled.button`
   border-radius: 10px;
   background-color: #d9d9d9;
 `;
+
+export const StyledImageButton = styled.button<{ width: string }>`
+  width: ${({ width }) => width};
+  background: none;
+  padding: 0;
+`;
