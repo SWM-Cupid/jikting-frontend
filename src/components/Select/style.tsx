@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import downarrow from 'assets/downarrow.png';
+import downarrow from 'assets/images/downarrow.png';
 
 export const StyledSelect = styled.select`
   width: 342px;
