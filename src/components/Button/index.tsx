@@ -12,5 +12,7 @@ export const Button = ({ title, onClick }: Props) => (
 );
 
 export const ImageButton = ({ children, onClick }: Props) => (
-  <StyledImageButton onClick={onClick}>{children}</StyledImageButton>
+  <StyledImageButton width="2rem" onClick={onClick}>
+    {children}
+  </StyledImageButton>
 );
