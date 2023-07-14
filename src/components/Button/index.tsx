@@ -1,17 +1,20 @@
-import { ReactNode } from 'react';
+import { ComponentProps, ReactNode } from 'react';
 import { StyledButton, StyledImageButton } from './style';
 
-interface Props {
-  title?: string;
+interface ButtonProps extends ComponentProps<'button'> {
+  size?: 'large' | 'medium';
+  color?: string;
+  background?: string;
   children?: ReactNode;
-  onClick(): void;
 }
 
-export const Button = ({ title, onClick }: Props) => (
-  <StyledButton onClick={onClick}>{title}</StyledButton>
+export const Button = ({ title, size = 'large', color = 'white', background = '#ddd', onClick }: ButtonProps) => (
+  <StyledButton size={size} color={color} background={background} onClick={onClick}>
+    {title}
+  </StyledButton>
 );
 
-export const ImageButton = ({ children, onClick }: Props) => (
+export const ImageButton = ({ children, onClick }: ButtonProps) => (
   <StyledImageButton width="2rem" onClick={onClick}>
     {children}
   </StyledImageButton>
