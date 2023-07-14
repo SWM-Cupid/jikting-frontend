@@ -1,10 +1,25 @@
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 
-export const StyledButton = styled.button`
-  width: 360px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #d9d9d9;
+const BUTTON_SIZE = {
+  large: css`
+    width: 35rem;
+    height: 6rem;
+    border-radius: 1rem;
+  `,
+  medium: css`
+    width: 17rem;
+    height: 5rem;
+    border-radius: 1.6rem;
+  `,
+};
+
+export const StyledButton = styled.button<{ size: 'large' | 'medium'; color: string; background: string }>`
+  ${({ size, color, background }) =>
+    css`
+      ${BUTTON_SIZE[size]};
+      color: ${color};
+      background: ${background};
+    `};
 `;
 
 export const StyledImageButton = styled.button<{ width: string }>`
