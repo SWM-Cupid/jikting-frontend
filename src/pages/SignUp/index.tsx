@@ -13,6 +13,7 @@ export const SignUp = () => {
     userNickName: '',
     userName: '',
     userPhoneNumber: '',
+    userGender: '',
   });
   const [isSendCode, setIsSendCode] = useState(false);
   const [code, setCode] = useState('');
@@ -31,19 +32,12 @@ export const SignUp = () => {
     }));
   };
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setUserInfo({ ...userInfo, [e.currentTarget.name]: e.currentTarget.value });
+  const setUserGender = (userGender: string) => {
+    setUserInfo({ ...userInfo, userGender });
   };
 
   const handleNextClick = () => {
     setStep((step) => step + 1);
-  };
-
-  const handleCheckPasswordBlur = (e: React.FormEvent<HTMLInputElement>) => {
-    if (e.currentTarget.value !== userInfo.userPassword) {
-      // 에러 메시지 띄우기
-      console.log('ERROR');
-    }
   };
 
   return (
@@ -55,14 +49,13 @@ export const SignUp = () => {
             userInfo={userInfo}
             handleUserInfoChange={handleUserInfoChange}
             handleNextClick={handleNextClick}
-            handleCheckPasswordBlur={handleCheckPasswordBlur}
           />
         )}
         {step === 2 && (
           <SignUpNickName
             userInfo={userInfo}
             handleUserInfoChange={handleUserInfoChange}
-            handleButtonClick={handleButtonClick}
+            setUserGender={setUserGender}
             handleNextClick={handleNextClick}
           />
         )}
