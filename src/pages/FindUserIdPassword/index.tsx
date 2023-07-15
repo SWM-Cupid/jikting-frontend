@@ -67,3 +67,30 @@ export const FindIdResult = () => {
     </S.FindUserIdPasswordWrapper>
   );
 };
+
+export const FindPasswordResult = () => {
+  const [newPassword, setNewPassword] = useState('');
+
+  const handlePasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setNewPassword(e.currentTarget.value);
+  };
+
+  const handleCheckPasswordBlur = (e: React.FormEvent<HTMLInputElement>) => {
+    if (e.currentTarget.value !== newPassword) {
+      // TODO: 에러 메시지 띄우기
+    }
+  };
+
+  const handleChangePasswordClick = () => {
+    // TODO: 비밀번호 확인에서 에러가 발생하지 않는 경우 새 비밀번호 전송
+  };
+  return (
+    <S.FindUserIdPasswordWrapper>
+      <S.Content>
+        <Input title="새 비밀번호" onChange={handlePasswordChange} value={newPassword} />
+        <Input title="새 비밀번호 확인" onBlur={handleCheckPasswordBlur} />
+        <Button title="다음" onClick={handleChangePasswordClick} />
+      </S.Content>
+    </S.FindUserIdPasswordWrapper>
+  );
+};
