@@ -4,11 +4,16 @@ import { useState } from 'react';
 import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 
-export const FindUserId = () => {
+export const FindUserIdPassword = ({ findType }: { findType: string }) => {
   const [isSendCode, setIsSendCode] = useState(false);
   const [code, setCode] = useState('');
+  const [userId, setUserId] = useState('');
   const [userName, setUserName] = useState('');
   const [UsesrPhoneNumber, setUserPhoneNumber] = useState('');
+
+  const handleIdBlur = (e: React.FormEvent<HTMLInputElement>) => {
+    setUserId(e.currentTarget.value);
+  };
 
   const handleCodeBlur = (e: React.FormEvent<HTMLInputElement>) => {
     setCode(e.currentTarget.value);
@@ -35,6 +40,7 @@ export const FindUserId = () => {
       <Header previous />
       <S.Content>
         {isSendCode ? <Input title="인증번호" name="user" onBlur={handleCodeBlur} /> : null}
+        {findType === 'findPassword' ? <Input title="아이디" name="userName" onBlur={handleIdBlur} /> : null}
         <Input title="이름" name="userName" onBlur={handleNameBlur} />
         <Input title="휴대폰 번호" name="userPhoneNumber" onChange={handlePhoneNumberBlur} />
         <Button title={isSendCode ? '다음' : '인증번호 전송'} onClick={handleButtonClick} />
