@@ -12,7 +12,7 @@ interface Props {
     userPhoneNumber: string;
   };
   handleNextClick(): void;
-  setUserGender(usergender: string): void;
+  setUserGender(userGender: string): void;
   handleUserInfoChange(e: React.FormEvent<HTMLInputElement>): void;
 }
 const genderList = ['남성', '여성'];
