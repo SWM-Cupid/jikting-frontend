@@ -48,3 +48,22 @@ export const FindUserIdPassword = ({ findType }: { findType: string }) => {
     </S.FindUserIdPasswordWrapper>
   );
 };
+
+export const FindIdResult = () => {
+  const handleLoginClick = () => {
+    // TODO: 로그인 화면으로 이동
+  };
+
+  const handleFindPasswordClick = () => {
+    // TODO: 비밀번호 찾기 화면으로 이동
+  };
+  // TODO: 아이디 받아오는 기능 추가
+  return (
+    <S.FindUserIdPasswordWrapper>
+      <S.Content>
+        <Button title="로그인" onClick={handleLoginClick} />
+        <Button title="비밀번호 찾기" onClick={handleLoginClick} />
+      </S.Content>
+    </S.FindUserIdPasswordWrapper>
+  );
+};
