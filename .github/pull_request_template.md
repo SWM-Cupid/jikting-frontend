@@ -1,7 +1,7 @@
 ## Issue
 
 closed #깃허브이슈번호
-[SP-지라 이슈 번호](지라 이슈 링크)
+[SP-지라 이슈 번호](https://soma-cupid.atlassian.net/browse/SP- 이슈 번호)
 
 ## 요구사항
 
