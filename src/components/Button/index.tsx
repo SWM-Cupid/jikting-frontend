@@ -2,7 +2,7 @@ import { ComponentProps, ReactNode } from 'react';
 import { StyledButton, StyledImageButton } from './style';
 
 interface ButtonProps extends ComponentProps<'button'> {
-  size?: 'large' | 'medium';
+  size?: 'large' | 'medium' | `small`;
   color?: string;
   background?: string;
   children?: ReactNode;
