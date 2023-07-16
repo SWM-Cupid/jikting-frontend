@@ -11,9 +11,16 @@ const BUTTON_SIZE = {
     height: 5rem;
     border-radius: 1.6rem;
   `,
+  small: css`
+    width: auto;
+    height: auto;
+    border-radius: 2.2rem;
+    font-size: 1.4rem;
+    padding: 0.8rem 1.6rem;
+  `,
 };
 
-export const StyledButton = styled.button<{ size: 'large' | 'medium'; color: string; background: string }>`
+export const StyledButton = styled.button<{ size: 'large' | 'medium' | 'small'; color: string; background: string }>`
   ${({ size, color, background }) =>
     css`
       ${BUTTON_SIZE[size]};
