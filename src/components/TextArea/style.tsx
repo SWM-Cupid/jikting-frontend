@@ -21,6 +21,7 @@ export const TextArea = styled.textarea`
   border-radius: 1.6rem;
   background: #fafafa;
   padding: 2rem 2rem;
+  resize: none;
 
   &::placeholder {
     color: #cccccc;
