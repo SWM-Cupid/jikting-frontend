@@ -1,6 +1,6 @@
 import { KeywordItem } from './KeywordItem';
 import * as S from './style';
-import Plus from 'assets/images/plus.svg';
+import { Plus } from 'assets/images/Plus';
 
 interface Props {
   title: '성격' | '취미';
@@ -13,7 +13,7 @@ export const Keyword = ({ title, keywordList }: Props) => {
       <S.Title>{title}</S.Title>
       <S.AddBox>
         <S.PlaceHolder>{title === '취미' ? '취미를' : '성격을'} 추가해주세요.</S.PlaceHolder>
-        <Plus />
+        <Plus width="2.4rem" height="2.4rem" fill="#999999" />
       </S.AddBox>
       <S.KeywordList>
         {keywordList.map((item) => (
