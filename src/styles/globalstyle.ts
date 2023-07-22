@@ -17,6 +17,7 @@ time, mark, audio, video, input, textarea, select {
   margin: 0;
   padding: 0;
   border: 0;
+  font:inherit;
 }
 
 * {
