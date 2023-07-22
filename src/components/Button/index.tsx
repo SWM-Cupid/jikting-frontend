@@ -8,8 +8,8 @@ interface ButtonProps extends ComponentProps<'button'> {
   children?: ReactNode;
 }
 
-export const Button = ({ title, size = 'large', color = 'white', background = '#ddd', onClick }: ButtonProps) => (
-  <StyledButton size={size} color={color} background={background} onClick={onClick}>
+export const Button = ({ title, type, size = 'large', color = 'white', background = '#ddd', onClick }: ButtonProps) => (
+  <StyledButton type={type} size={size} color={color} background={background} onClick={onClick}>
     {title}
   </StyledButton>
 );
