@@ -1,6 +1,9 @@
-import { styled } from 'styled-components';
+import { FieldError, FieldErrorsImpl, FieldValues, Merge } from 'react-hook-form';
+import { css, styled } from 'styled-components';
 
-export const StyledInput = styled.input`
+export const StyledInput = styled.input<{
+  error: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>> | undefined;
+}>`
   width: 342px;
   height: 50px;
   border-bottom: 2px solid #d3d3d3;
@@ -13,9 +16,20 @@ export const StyledInput = styled.input`
     outline: none;
     border-color: #5e9ed6;
   }
+
+  ${({ error }) =>
+    error &&
+    css`
+      border-color: red;
+      &:focus {
+        outline: none;
+        border-color: red;
+      }
+    `}
 `;
 
-export const StyledChatInput = styled(StyledInput)`
+// TODO: 다시 확인
+export const StyledChatInput = styled.input`
   width: 330px;
   height: 40px;
   border: none;

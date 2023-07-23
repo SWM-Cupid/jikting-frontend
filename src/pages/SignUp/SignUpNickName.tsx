@@ -2,36 +2,46 @@ import { Input } from 'components/Input';
 import { Button } from 'components/Button';
 import * as S from './style';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { validNickNameCheck } from 'validation';
 
 interface Props {
-  userInfo: {
-    userId: string;
-    userPassword: string;
-    userNickName: string;
-    userName: string;
-    userPhoneNumber: string;
-  };
   handleNextClick(): void;
-  setUserGender(userGender: string): void;
-  handleUserInfoChange(e: React.FormEvent<HTMLInputElement>): void;
+  updateUserInfo(data: { [userData: string]: string }): void;
 }
 const genderList = ['남성', '여성'];
 
-export const SignUpNickName = ({ userInfo, handleUserInfoChange, setUserGender, handleNextClick }: Props) => {
+export const SignUpNickName = ({ updateUserInfo, handleNextClick }: Props) => {
   const [selectedGender, setSelectedGender] = useState('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ mode: 'onBlur' });
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    setUserGender(e.currentTarget.innerText);
     setSelectedGender(e.currentTarget.innerText);
   };
+
+  const onSubmit = (data: { [key: string]: string }) => {
+    data['userGender'] = selectedGender;
+    updateUserInfo(data);
+    handleNextClick();
+  };
   return (
-    <>
-      <Input title="닉네임" value={userInfo.userNickName} name="userNickName" onChange={handleUserInfoChange} />
+    <S.Form onSubmit={handleSubmit(onSubmit)}>
+      <Input
+        title="닉네임"
+        error={errors.userNickName}
+        {...register('userNickName', { required: '닉네임 입력은 필수 입니다.', validate: { validNickNameCheck } })}
+      />
+
       <S.GenderWrapper>
         <span>성별</span>
         <S.ButtonWrapper>
           {genderList.map((gender) => (
             <Button
+              type="button"
               key={gender}
               title={gender}
               size="medium"
@@ -42,7 +52,8 @@ export const SignUpNickName = ({ userInfo, handleUserInfoChange, setUserGender, 
           ))}
         </S.ButtonWrapper>
       </S.GenderWrapper>
-      <Button title="다음" onClick={handleNextClick}></Button>
-    </>
+
+      <Button type="submit" title="다음" background="#FF5680"></Button>
+    </S.Form>
   );
 };
