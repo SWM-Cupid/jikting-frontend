@@ -23,3 +23,9 @@ export const ButtonWrapper = styled.div`
   gap: 1rem;
   margin-top: 1rem;
 `;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+`;
