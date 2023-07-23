@@ -1,18 +1,11 @@
+import { ComponentProps } from 'react';
 import { FlexWrapper, StyledSelect } from './style';
 
-interface Props {
+interface SelectProps extends ComponentProps<'select'> {
   optionList: string[];
-  title?: string;
-  defaultValue?: string;
-  onChange(e: React.FormEvent<HTMLSelectElement>): void;
 }
 
-export const Select = ({
-  optionList,
-  title,
-  defaultValue,
-  onChange,
-}: Props) => {
+export const Select = ({ optionList, title, defaultValue, onChange }: SelectProps) => {
   return (
     <FlexWrapper>
       <span>{title}</span>
