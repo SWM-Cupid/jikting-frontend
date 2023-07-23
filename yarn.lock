@@ -3562,6 +3562,11 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
+react-hook-form@^7.45.1:
+  version "7.45.1"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.45.1.tgz#e352c7f4dbc7540f0756abbb4dcfd1122fecc9bb"
+  integrity sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==
+
 react-ios-time-picker@^0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/react-ios-time-picker/-/react-ios-time-picker-0.2.2.tgz#4c528736649147e5fb72e47f0469950ee39680f3"
