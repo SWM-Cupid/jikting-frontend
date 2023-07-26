@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const EditProfileWrapper = styled.div`
+export const EditProfileForm = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +12,9 @@ export const UploadImageWrapper = styled.div`
   gap: 1rem;
 `;
 
-export const UploadImageSmallWrapper = styled(EditProfileWrapper)`
+export const UploadImageSmallWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
 `;

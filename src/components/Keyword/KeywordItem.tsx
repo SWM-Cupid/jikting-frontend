@@ -1,18 +1,16 @@
 import * as S from './style';
-import DeleteCircle from 'assets/images/deletecircle.svg';
-
 interface Props {
   itemName: string;
-  handleDeleteClick(): void;
+  selected?: boolean;
+  handleKeywordItemClick?(): void;
+  children?: React.ReactNode;
 }
 
-export const KeywordItem = ({ itemName, handleDeleteClick }: Props) => {
+export const KeywordItem = ({ itemName, selected, handleKeywordItemClick, children }: Props) => {
   return (
-    <S.ItemWrapper>
-      <S.ItemName>{itemName}</S.ItemName>
-      <S.DeleteCircleWrapper onClick={handleDeleteClick}>
-        <DeleteCircle />
-      </S.DeleteCircleWrapper>
+    <S.ItemWrapper selected={selected} onClick={handleKeywordItemClick}>
+      {children}
+      <S.ItemName selected={selected}>{itemName}</S.ItemName>
     </S.ItemWrapper>
   );
 };
