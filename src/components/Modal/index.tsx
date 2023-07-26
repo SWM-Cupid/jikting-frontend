@@ -1,21 +1,31 @@
 import { Button } from 'components/Button';
-import * as M from './style';
+import * as S from './style';
 
 interface Props {
-  title: string;
-  handleButtonClick(): void;
+  title?: string;
+  children?: React.ReactNode;
+  handleButtonClick?(): void;
 }
 
 export const Modal = ({ title, handleButtonClick }: Props) => {
   return (
     <>
-      <M.Mask />
-      <M.Wrapper>
-        <M.Title>{title}</M.Title>
-        <M.ButtonWrapper>
-          <Button title="확인" size="medium" background="#D9D9D9" onClick={handleButtonClick}></Button>
-        </M.ButtonWrapper>
-      </M.Wrapper>
+      <S.Mask />
+      <S.Wrapper>
+        <S.Title>{title}</S.Title>
+        <S.ButtonWrapper>
+          <Button title="확인" size="large" background="#FF5680" onClick={handleButtonClick}></Button>
+        </S.ButtonWrapper>
+      </S.Wrapper>
+    </>
+  );
+};
+
+export const ModalBottomSheet = ({ children }: Props) => {
+  return (
+    <>
+      <S.Mask />
+      <S.Wrapper>{children}</S.Wrapper>
     </>
   );
 };

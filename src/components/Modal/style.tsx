@@ -11,24 +11,24 @@ export const Mask = styled.div`
 `;
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 0;
+  gap: 3rem;
   position: fixed;
-  top: 30%;
+  bottom: 0;
   left: 50%;
-  width: 34rem;
-  height: 21rem;
-  transform: translate(-50%, -50%);
+  width: ${Math.min(innerWidth * 0.1, 76.8)}rem;
+  transform: translate(-50%, 0);
   background: #fff;
-  border-radius: 1rem;
+  border-radius: 4.4rem 4.4rem 0rem 0rem;
 `;
 
 export const Title = styled.div`
-  position: relative;
-  top: 5rem;
   text-align: center;
 `;
 
 export const ButtonWrapper = styled.div`
-  position: relative;
-  top: 10rem;
   text-align: center;
 `;
