@@ -1,4 +1,5 @@
 import { Test } from 'Test';
+import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
 
@@ -11,6 +12,11 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
+  useEffect(() => {
+    const maxWidth = Math.min(768, innerWidth);
+    document.documentElement.style.setProperty('--app-max-width', `${maxWidth * 0.1}rem`);
+  }, []);
+
   return (
     <AppWrapper>
       <BrowserRouter>
