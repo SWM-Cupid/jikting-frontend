@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const SelectLoginWrapper = styled.div`
+export const LoginWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,4 +33,11 @@ export const DivideLine = styled.div`
   height: 2rem;
   border-radius: 0.1rem;
   background: #eee;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
 `;
