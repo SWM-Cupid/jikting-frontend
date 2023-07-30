@@ -36,8 +36,14 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
       return;
     }
 
-    // TODO: 인증번호 확인
-    updateUserInfo(data);
+    fetchVerificationCode(data.verificationCode)
+      .then(() => {
+        delete data.verificationCode;
+        updateUserInfo(data);
+      })
+      .catch(({ response }) => {
+        errors.verificationCode = response.message;
+      });
 
     // TODO: 회원가입
   };

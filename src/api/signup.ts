@@ -27,3 +27,7 @@ export const fetchSendCode = async (phone: string) => {
     return false;
   }
 };
+
+export const fetchVerificationCode = async (verificationCode: string) => {
+  return await unauthenticated.post('/api/v1/members/verification', { verificationCode });
+};
