@@ -4,6 +4,7 @@ import { Form } from './style';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { validNameCheck, validPhoneNumberCheck } from 'validation';
+import { fetchSendCode, fetchVerificationCode } from 'api/signup';
 
 interface Props {
   userInfo: {
@@ -25,14 +26,13 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
 
-  const sendCode = () => {
-    setIsSendCode(true);
-    // TODO: 인증번호 전송 기능
+  const sendCode = async (phone: string) => {
+    setIsSendCode(await fetchSendCode(phone));
   };
 
   const onSubmit = (data: { [key: string]: string }) => {
     if (!isSendCode) {
-      sendCode();
+      sendCode(data.userPhoneNumber);
       return;
     }
 
@@ -43,7 +43,7 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      {isSendCode ? <Input title="인증번호" name="user" /> : null}
+      {isSendCode ? <Input title="인증번호" error={errors.verificationCode} {...register('verificationCode')} /> : null}
       <Input
         title="이름"
         error={errors.userName}

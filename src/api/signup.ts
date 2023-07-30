@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { unauthenticated } from './axiosInstance';
 
 export const fetchUserNameCheck = async (username: string) => {
@@ -16,4 +17,13 @@ export const fetchNickNameCheck = async (nickname: string) => {
     .catch((error) => error.response.data.message);
 
   return response;
+};
+
+export const fetchSendCode = async (phone: string) => {
+  try {
+    await unauthenticated.post('/api/v1/members/code', { phone });
+    return true;
+  } catch {
+    return false;
+  }
 };
