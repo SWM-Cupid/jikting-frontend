@@ -3,6 +3,7 @@ import { Input } from 'components/Input';
 import { useForm } from 'react-hook-form';
 import { validIdCheck, validPasswordCheck } from 'validation';
 import { Form } from './style';
+import { fetchUserNameCheck } from 'api/signup';
 
 interface Props {
   handleNextClick(): void;
@@ -28,7 +29,13 @@ export const SignUpIdPassword = ({ updateUserInfo, handleNextClick }: Props) => 
       <Input
         title="아이디"
         error={errors.userId}
-        {...register('userId', { required: '아이디 입력은 필수 입니다.', validate: { validIdCheck } })}
+        {...register('userId', {
+          required: '아이디 입력은 필수 입니다.',
+          validate: {
+            validIdCheck,
+            fetchUserNameCheck,
+          },
+        })}
       />
       <Input
         type="password"
