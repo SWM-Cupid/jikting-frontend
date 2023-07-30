@@ -4,6 +4,7 @@ import * as S from './style';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { validNickNameCheck } from 'validation';
+import { fetchNickNameCheck } from 'api/signup';
 
 interface Props {
   handleNextClick(): void;
@@ -33,7 +34,10 @@ export const SignUpNickName = ({ updateUserInfo, handleNextClick }: Props) => {
       <Input
         title="닉네임"
         error={errors.userNickName}
-        {...register('userNickName', { required: '닉네임 입력은 필수 입니다.', validate: { validNickNameCheck } })}
+        {...register('userNickName', {
+          required: '닉네임 입력은 필수 입니다.',
+          validate: { validNickNameCheck, fetchNickNameCheck },
+        })}
       />
 
       <S.GenderWrapper>
