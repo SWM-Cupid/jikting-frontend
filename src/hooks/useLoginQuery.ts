@@ -3,8 +3,8 @@ import { useMutation } from 'react-query';
 
 export const useMutationLogin = () => {
   return useMutation(fetchLogin, {
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: () => {
+      console.log('로그인 성공');
     },
     onError: (error) => {
       console.log(error);

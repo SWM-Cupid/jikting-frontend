@@ -1,4 +1,8 @@
 import { Test } from 'Test';
+import { EditProfile } from 'pages/EditProfile';
+import { SelectLogin } from 'pages/Login';
+import { NormalLogin } from 'pages/Login/NormalLogin';
+import { SignUp } from 'pages/SignUp';
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -16,13 +20,15 @@ const App = () => {
     const maxWidth = Math.min(768, innerWidth);
     document.documentElement.style.setProperty('--app-max-width', `${maxWidth * 0.1}rem`);
   }, []);
-
   return (
     <AppWrapper>
       <BrowserRouter>
         <Routes>
           <Route path="/recommend" element={<div>recommend</div>} />
-          <Route path="/" element={<Test></Test>} />
+          <Route path="/" element={<SelectLogin />} />
+          <Route path="/normallogin" element={<NormalLogin />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/editprofile" element={<EditProfile />} />
         </Routes>
       </BrowserRouter>
     </AppWrapper>

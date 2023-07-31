@@ -6,7 +6,7 @@ import { theme } from 'styles/theme';
 import { useForm } from 'react-hook-form';
 import { validIdCheck, validPasswordCheck } from 'validation';
 import { useMutationLogin } from 'hooks/useLoginQuery';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const NormalLogin = () => {
   const {
@@ -15,12 +15,18 @@ export const NormalLogin = () => {
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
 
-  const { mutate } = useMutationLogin();
+  const { mutateAsync } = useMutationLogin();
+  const navigate = useNavigate();
 
-  const handleLoginClick = (data: { [key: string]: string }) => {
+  const handleLoginClick = async (data: { [key: string]: string }) => {
     const { username, password } = data;
-    const result = mutate({ username, password });
-    console.log(result);
+    try {
+      mutateAsync({ username, password });
+      navigate('/main');
+    } catch {
+      // TODO: 로그인 실패 Modal 창 띄우기
+      console.log('로그인 실패');
+    }
   };
 
   const handleFindIdClick = () => {
@@ -32,7 +38,7 @@ export const NormalLogin = () => {
   };
 
   const handleSignUpClick = () => {
-    // TODO: 회원가입 페이지로 이동
+    navigate('/signup');
   };
   return (
     <S.LoginWrapper>
