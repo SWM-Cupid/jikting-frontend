@@ -14,8 +14,8 @@ export const Button = ({ title, type, size = 'large', color = 'white', backgroun
   </StyledButton>
 );
 
-export const ImageButton = ({ children, onClick }: ButtonProps) => (
-  <StyledImageButton width="2rem" onClick={onClick}>
+export const ImageButton = ({ name, children, onClick }: ButtonProps) => (
+  <StyledImageButton width="2rem" name={name} onClick={onClick}>
     {children}
   </StyledImageButton>
 );
