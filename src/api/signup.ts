@@ -1,4 +1,3 @@
-import { isAxiosError } from 'axios';
 import { unauthenticated } from './axiosInstance';
 
 export const fetchUserNameCheck = async (username: string) => {
