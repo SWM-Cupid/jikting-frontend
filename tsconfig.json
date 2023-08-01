@@ -29,7 +29,9 @@
   },
   "include": [
     "src",
-    "svg.d.ts"
+  ],
+  "files": [
+    "svg.d.ts",
   ],
   "references": [
     {
