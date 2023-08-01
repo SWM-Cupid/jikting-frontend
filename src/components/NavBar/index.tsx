@@ -7,31 +7,53 @@ import { NavBarWrapper } from './style';
 import { ImageButton } from 'components/Button';
 import { useState } from 'react';
 import { theme } from 'styles/theme';
+import { useNavigate } from 'react-router-dom';
 
-export const NavBar = () => {
-  const [active, setActive] = useState('home');
+export const NavBar = ({ defaultActive }: { defaultActive: string }) => {
+  const [active, setActive] = useState(defaultActive);
+  const navigate = useNavigate();
 
-  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>, routePath: string) => {
     setActive(e.currentTarget.name);
+    navigate(routePath);
   };
-  console.log(active);
+
+  const navItems = [
+    {
+      name: 'main',
+      routePath: '/main',
+      icon: Home,
+    },
+    {
+      name: 'team',
+      routePath: '/team',
+      icon: People,
+    },
+    {
+      name: 'like',
+      routePath: '/like',
+      icon: Heart,
+    },
+    {
+      name: 'chat',
+      routePath: '/chat',
+      icon: Chat,
+    },
+    {
+      name: 'mypage',
+      routePath: '/mypage',
+      icon: Person,
+    },
+  ];
+  const color = (name: string) => (active === name ? theme.colors.mainPink : '#CCCCCC');
+
   return (
     <NavBarWrapper>
-      <ImageButton name="home" onClick={handleButtonClick}>
-        <Home fill={active === 'home' ? theme.colors.mainPink : '#CCCCCC'} />
-      </ImageButton>
-      <ImageButton name="people" onClick={handleButtonClick}>
-        <People fill={active === 'people' ? theme.colors.mainPink : '#CCCCCC'} />
-      </ImageButton>
-      <ImageButton name="heart" onClick={handleButtonClick}>
-        <Heart fill={active === 'heart' ? theme.colors.mainPink : '#CCCCCC'} />
-      </ImageButton>
-      <ImageButton name="chat" onClick={handleButtonClick}>
-        <Chat fill={active === 'chat' ? theme.colors.mainPink : '#CCCCCC'} />
-      </ImageButton>
-      <ImageButton name="person" onClick={handleButtonClick}>
-        <Person fill={active === 'person' ? theme.colors.mainPink : '#CCCCCC'} />
-      </ImageButton>
+      {navItems.map((item) => (
+        <ImageButton key={item.name} name={item.name} onClick={(e) => handleButtonClick(e, item.routePath)}>
+          <item.icon fill={color(item.name)} />
+        </ImageButton>
+      ))}
     </NavBarWrapper>
   );
 };
