@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export const authenticated = axios.create({
-  baseURL: '/auth',
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export const unauthenticated = axios.create({
