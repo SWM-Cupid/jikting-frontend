@@ -6,9 +6,10 @@ import { theme } from 'styles/theme';
 import { useCallback, useState } from 'react';
 import { CreateTeam } from './CreateTeam';
 import { useQueryTeamInfo } from 'hooks/useTeamInfoQurey';
+import { TeamDetail } from './TeamDetail';
 
 export const TeamList = () => {
-  const { isError } = useQueryTeamInfo();
+  const { isSuccess, isError, data } = useQueryTeamInfo();
   const [registerTeam, setRegisterTeam] = useState(false);
   const handleRegisterTeamClick = useCallback(() => {
     setRegisterTeam(true);
@@ -39,6 +40,8 @@ export const TeamList = () => {
         </S.TeamWrapper>
       </>
     );
+
+  if (isSuccess && data) return <TeamDetail {...data.data} />;
 };
 
 const NoTeam = () => {
