@@ -5,6 +5,7 @@ export const TeamWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  gap: 1rem;
 `;
 
 export const NoTeamWrapper = styled.div`
@@ -27,4 +28,11 @@ export const NoTeamDiv = styled.div`
 export const ButtonWrapper = styled.div`
   position: fixed;
   bottom: 10%;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 `;
