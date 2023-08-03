@@ -6,11 +6,11 @@ interface SelectProps extends ComponentProps<'select'> {
 }
 
 export const Select = forwardRef(
-  ({ optionList, title, defaultValue, onChange }: SelectProps, ref: React.Ref<HTMLSelectElement> | null) => {
+  ({ optionList, title, ...props }: SelectProps, ref: React.Ref<HTMLSelectElement> | null) => {
     return (
       <FlexWrapper>
         <Title>{title}</Title>
-        <StyledSelect onChange={onChange} defaultValue={defaultValue} ref={ref}>
+        <StyledSelect {...props} ref={ref}>
           {optionList.map((item) => {
             return <option key={item}>{item}</option>;
           })}

@@ -21,7 +21,7 @@ export const NormalLogin = () => {
   const handleLoginClick = async (data: { [key: string]: string }) => {
     const { username, password } = data;
     try {
-      mutateAsync({ username, password });
+      await mutateAsync({ username, password });
       navigate('/main');
     } catch {
       // TODO: 로그인 실패 Modal 창 띄우기
