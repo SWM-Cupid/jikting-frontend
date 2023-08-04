@@ -4,7 +4,7 @@ export const ChatWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 0.6rem;
 `;
 
 export const TeamButton = styled.div`
@@ -14,9 +14,10 @@ export const TeamButton = styled.div`
 
 export const TeamWrapper = styled.div`
   display: flex;
-  width: 37rem;
+  justify-content: space-between;
+  width: ${Math.min(innerWidth * 0.095, 76.8 * 0.95)}rem;
   height: 8rem;
-  border-radius: 2.4rem;
+  border-radius: 1.2rem;
   background: #fafafa;
 
   :hover {
@@ -61,6 +62,7 @@ export const Image = styled.img`
 
 export const FlexColumn = styled.div`
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
 `;
