@@ -197,3 +197,47 @@ export const MyChat = styled(FlexRow)`
   background: ${theme.colors.mainPink};
   font-size: 1.4rem;
 `;
+
+/* sidebar */
+const slideIn = keyframes`
+  from {
+    transform: translateX(150%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+`;
+
+export const SideBarWrapper = styled(FlexColumn)`
+  position: absolute;
+  right: 0;
+  width: ${Math.min(innerWidth * 0.07, 76.8 * 0.7)}rem;
+  height: 100dvh;
+  background: ${theme.colors.mainWhite};
+  gap: 1.2rem;
+  z-index: 3;
+  animation-duration: 0.3s;
+  animation-name: ${slideIn};
+`;
+
+export const ImageNickNameWrapper = styled(FlexRow)`
+  gap: 1rem;
+  align-items: center;
+  margin-left: 2rem;
+  margin-right: 2rem;
+`;
+
+export const NickName = styled.div`
+  color: #212121;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 2rem;
+`;
+
+export const Mask = styled.div`
+  position: absolute;
+  width: ${Math.min(innerWidth * 0.1, 76.8)}rem;
+  height: 100%;
+  margin: 0 auto;
+  background: rgb(0, 0, 0, 0.2);
+`;
