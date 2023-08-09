@@ -2,6 +2,8 @@ import { Header } from 'components/Header';
 import * as S from './style';
 import { NavBar } from 'components/NavBar';
 import { useChatListQuery } from 'hooks/useChatQuery';
+import { useState } from 'react';
+import { ChatRoom } from './ChatRoom';
 
 interface ITeam {
   chattingRoomId: number;
@@ -12,8 +14,9 @@ interface ITeam {
 
 export const ChatList = () => {
   const { isSuccess, data } = useChatListQuery();
-  const hanldeTeamButtonClick = () => {
-    // TODO
+  const [enterChatRoomId, setEnterChatRoomId] = useState(0);
+  const hanldeTeamButtonClick = (chattingRoomId: number) => {
+    setEnterChatRoomId(chattingRoomId);
   };
 
   if (isSuccess && data) {
@@ -28,7 +31,7 @@ export const ChatList = () => {
         {chatList.map((team: ITeam) => {
           const { chattingRoomId, opposingTeamName, lastMessage, images } = team;
           return (
-            <S.TeamWrapper onClick={hanldeTeamButtonClick} key={chattingRoomId}>
+            <S.TeamWrapper onClick={() => hanldeTeamButtonClick(chattingRoomId)} key={chattingRoomId}>
               <S.ImagesWrapper>
                 {images.map((image) => (
                   <S.Image src={image} key={image} />
@@ -44,6 +47,7 @@ export const ChatList = () => {
           );
         })}
         <NavBar defaultActive="chat" />
+        {enterChatRoomId && <ChatRoom chattingRoomId={enterChatRoomId} />}
       </S.ChatWrapper>
     );
   }
