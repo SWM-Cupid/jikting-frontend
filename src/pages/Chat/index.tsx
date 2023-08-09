@@ -36,10 +36,10 @@ export const ChatList = () => {
                 <S.Image />
                 <S.Image />
               </S.ImagesWrapper>
-              <S.FlexColumn>
+              <S.FlexColumnGrow>
                 <S.TeamName>{opposingTeamName}</S.TeamName>
                 <S.RecentMessage>{lastMessage}</S.RecentMessage>
-              </S.FlexColumn>
+              </S.FlexColumnGrow>
             </S.TeamWrapper>
           );
         })}

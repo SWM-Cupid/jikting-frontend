@@ -165,13 +165,25 @@ export const ChatInput = styled.input`
 `;
 
 export const Content = styled(FlexColumn)`
-  gap: 1.2rem;
-  margin-top: 1rem;
+  gap: 0.6rem;
+  padding: 1rem 0;
+  flex-direction: column-reverse;
   width: ${Math.min(innerWidth * 0.095, 76.8 * 0.95)}rem;
+  max-height: ${innerHeight * 0.1 - 17.6}rem;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-export const ChatRowGap = styled(FlexRow)`
+export const ChatRowLeftAlign = styled(FlexRow)`
   gap: 1rem;
+  margin-bottom: 0.4rem;
+`;
+
+export const ChatRowRightAlign = styled(FlexRow)`
+  gap: 1rem;
+  align-self: flex-end;
 `;
 
 export const ChatImage = styled.img`
@@ -188,14 +200,17 @@ export const OtherChat = styled(FlexRow)`
   border-radius: 0.4rem 2.2rem 2.2rem 2.2rem;
   background: ${theme.colors.mainWhite};
   font-size: 1.4rem;
+  max-width: ${Math.min(innerWidth * 0.065, 76.8 * 0.65)}rem;
 `;
 
 export const MyChat = styled(FlexRow)`
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.4rem;
   align-items: center;
   border-radius: 2.2rem 2.2rem 0.4rem 2.2rem;
   background: ${theme.colors.mainPink};
   font-size: 1.4rem;
+  color: ${theme.colors.mainWhite};
+  max-width: ${Math.min(innerWidth * 0.065, 76.8 * 0.65)}rem;
 `;
 
 /* sidebar */
