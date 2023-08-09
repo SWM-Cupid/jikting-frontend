@@ -3,6 +3,7 @@ import { StyledButton, StyledImageButton } from './style';
 
 interface ButtonProps extends ComponentProps<'button'> {
   size?: 'large' | 'medium' | `small`;
+  width?: string;
   color?: string;
   background?: string;
   children?: ReactNode;
@@ -14,8 +15,8 @@ export const Button = ({ title, type, size = 'large', color = 'white', backgroun
   </StyledButton>
 );
 
-export const ImageButton = ({ name, children, onClick }: ButtonProps) => (
-  <StyledImageButton width="2rem" name={name} onClick={onClick}>
+export const ImageButton = ({ name, width, children, onClick }: ButtonProps) => (
+  <StyledImageButton width={width} name={name} onClick={onClick}>
     {children}
   </StyledImageButton>
 );

@@ -29,7 +29,7 @@ export const StyledButton = styled.button<{ size: 'large' | 'medium' | 'small'; 
     `};
 `;
 
-export const StyledImageButton = styled.button<{ width: string }>`
+export const StyledImageButton = styled.button<{ width: string | undefined }>`
   width: ${({ width }) => width};
   background: none;
   padding: 0;
