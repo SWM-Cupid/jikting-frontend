@@ -2,7 +2,7 @@ import { unauthenticated } from './axiosInstance';
 
 export const fetchUserNameCheck = async (username: string) => {
   const response = await unauthenticated
-    .post('/api/v1/members/username/check', { username })
+    .post('/members/username/check', { username })
     .then(() => true)
     .catch((error) => error.response.data.message);
 
@@ -11,7 +11,7 @@ export const fetchUserNameCheck = async (username: string) => {
 
 export const fetchNickNameCheck = async (nickname: string) => {
   const response = await unauthenticated
-    .post('/api/v1/members/nickname/check', { nickname })
+    .post('/members/nickname/check', { nickname })
     .then(() => true)
     .catch((error) => error.response.data.message);
 
@@ -20,7 +20,7 @@ export const fetchNickNameCheck = async (nickname: string) => {
 
 export const fetchSendCode = async (phone: string) => {
   try {
-    await unauthenticated.post('/api/v1/members/code', { phone });
+    await unauthenticated.post('/members/code', { phone });
     return true;
   } catch {
     return false;
@@ -28,5 +28,5 @@ export const fetchSendCode = async (phone: string) => {
 };
 
 export const fetchVerificationCode = async (verificationCode: string) => {
-  return await unauthenticated.post('/api/v1/members/verification', { verificationCode });
+  return await unauthenticated.post('/members/verification', { verificationCode });
 };
