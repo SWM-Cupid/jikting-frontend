@@ -1,8 +1,9 @@
-import { Test } from 'Test';
+import { ChatList } from 'pages/Chat';
 import { EditProfile } from 'pages/EditProfile';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
 import { SignUp } from 'pages/SignUp';
+import { TeamList } from 'pages/Team';
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -11,7 +12,6 @@ const AppWrapper = styled.div`
   min-height: 100dvh;
   max-width: var(--app-max-width, 76.8rem);
   margin: 0 auto;
-  padding-bottom: 4rem;
   background-color: white;
 `;
 
@@ -24,11 +24,13 @@ const App = () => {
     <AppWrapper>
       <BrowserRouter>
         <Routes>
-          <Route path="/recommend" element={<div>recommend</div>} />
           <Route path="/" element={<SelectLogin />} />
+          <Route path="/main" element={<ChatList />} />
           <Route path="/normallogin" element={<NormalLogin />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/teamlist" element={<TeamList />} />
+          <Route path="/chatlist" element={<ChatList />} />
         </Routes>
       </BrowserRouter>
     </AppWrapper>
