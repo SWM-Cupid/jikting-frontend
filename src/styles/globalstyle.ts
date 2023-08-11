@@ -27,7 +27,9 @@ time, mark, audio, video, input, textarea, select {
 html {
   font-family: 'Pretendard';
   font-size: 62.5%; // REM계산을 쉽게 하기 위해 기본 폰트 10px로 설정
-  overflow: hidden;
+  &::-webkit-scrollbar {
+    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  }
 }
 
 body {
