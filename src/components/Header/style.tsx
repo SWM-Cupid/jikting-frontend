@@ -14,4 +14,8 @@ export const Title = styled.h3`
   display: flex;
   align-items: center;
   text-align: center;
+  color: #212121;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.4rem;
 `;
