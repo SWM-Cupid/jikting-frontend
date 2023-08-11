@@ -45,7 +45,7 @@ export const SlideContainer = styled.div`
   height: ${innerHeight * 0.06}rem;
   scroll-snap-type: x mandatory;
   overflow-x: scroll;
-  padding: 0 ${Math.min(innerWidth * 0.015, 76.8)}rem;
+  padding: 0 ${Math.min(innerWidth * 0.0075, 76.8)}rem;
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
@@ -59,4 +59,31 @@ export const SlideItem = styled.div<{ imageurl: string }>`
   border-radius: 3.4rem;
   background: ${({ imageurl }) => `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%),
     url(${imageurl}) lightgray 50% / cover no-repeat;`};
+`;
+
+export const DotsWrapper = styled(FlexRow)`
+  width: 6rem;
+  height: 2.4rem;
+  padding: 0.8rem;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  border-radius: 1.3rem;
+  background: #fafafa;
+`;
+
+export const Dot = styled.div<{ selected?: boolean }>`
+  width: 0.8rem;
+  height: 0.8rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #e4e4e4;
+  transition: all ease-in-out 0.3s;
+
+  ${({ selected }) =>
+    selected &&
+    css`
+      width: 1.6rem;
+      background: #212121;
+      transition: all ease-in-out 0.3s;
+    `}
 `;
