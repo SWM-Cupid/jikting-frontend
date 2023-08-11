@@ -47,7 +47,7 @@ export const ChatList = () => {
           );
         })}
         <NavBar defaultActive="chat" />
-        {enterChatRoomId && <ChatRoom chattingRoomId={enterChatRoomId} />}
+        {enterChatRoomId ? <ChatRoom chattingRoomId={enterChatRoomId} /> : null}
       </S.ChatWrapper>
     );
   }
