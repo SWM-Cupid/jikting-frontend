@@ -10,8 +10,10 @@ export const FlexRow = styled.div`
 `;
 
 export const MainWrapper = styled(FlexColum)`
+  position: relative;
   align-items: center;
   gap: 1rem;
+  overflow-y: auto;
 `;
 
 export const TeamInfo = styled(FlexColum)`
@@ -54,11 +56,63 @@ export const SlideContainer = styled.div`
 `;
 
 export const SlideItem = styled.div<{ imageurl: string }>`
+  position: relative;
   flex: 0 0 ${Math.min(innerWidth * 0.085, 76.8)}rem;
   scroll-snap-align: center;
   border-radius: 3.4rem;
   background: ${({ imageurl }) => `linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 100%),
     url(${imageurl}) lightgray 50% / cover no-repeat;`};
+`;
+
+export const Member = styled(FlexColum)`
+  position: absolute;
+  bottom: 1rem;
+  width: 90%;
+  gap: 0.8rem;
+  margin: 0 2rem;
+`;
+
+export const Name = styled.div`
+  color: #fff;
+  font-size: 2.8rem;
+  font-weight: 900;
+  line-height: 3.2rem;
+`;
+
+export const Age = styled(Name)`
+  font-weight: 400;
+`;
+
+export const MemberInfo = styled.div`
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: 2rem;
+`;
+
+export const MemberDescription = styled.div`
+  color: #fff;
+  font-size: 1.4rem;
+  line-height: 2rem;
+`;
+
+export const MemeberKeywordWrapper = styled(FlexRow)`
+  flex-wrap: wrap;
+  gap: 0.8rem;
+`;
+
+export const MemberKeyword = styled.div`
+  display: flex;
+  padding: 0.6rem 1.2rem;
+  align-items: flex-start;
+  gap: 0.8rem;
+  border-radius: 1.4rem;
+  backdrop-filter: blur(20px);
+  background: rgba(245, 245, 245, 0.2);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.6rem;
 `;
 
 export const DotsWrapper = styled(FlexRow)`
@@ -86,4 +140,11 @@ export const Dot = styled.div<{ selected?: boolean }>`
       background: #212121;
       transition: all ease-in-out 0.3s;
     `}
+`;
+
+export const Likeable = styled(FlexRow)`
+  position: relative;
+  top: -2rem;
+  justify-content: space-between;
+  width: 85%;
 `;
