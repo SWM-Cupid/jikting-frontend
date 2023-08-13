@@ -44,7 +44,7 @@ export const EditProfile = () => {
   const [hobbies, setHobbies] = useState<string[]>([]);
 
   interface IForm {
-    age: string;
+    birth: string;
     height: number;
     mbti: string;
     address: string;
@@ -59,8 +59,8 @@ export const EditProfile = () => {
   }
 
   const onSubmit: SubmitHandler<IForm> = (data: IForm) => {
-    const age = data.age;
-    data.age = `${age.slice(0, 4)}.${age.slice(4, 6)}.${age.slice(6)}`;
+    const age = data.birth;
+    data.birth = `${age.slice(0, 4)}.${age.slice(4, 6)}.${age.slice(6)}`;
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
     data['personalities'] = personalities;
@@ -83,9 +83,9 @@ export const EditProfile = () => {
       </S.UploadImageWrapper>
       <Input
         title="생년월일"
-        error={errors.age}
+        error={errors.birth}
         placeholder="ex> 19990130"
-        {...register('age', {
+        {...register('birth', {
           required: '생년월일 입력은 필수 입니다.',
           validate: {
             validBirthCheck,
