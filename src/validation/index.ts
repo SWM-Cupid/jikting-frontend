@@ -22,3 +22,8 @@ export const validPhoneNumberCheck = (input: string) => {
   const validPhoneNumberPattern = /^[0-9]{11}$/;
   return validPhoneNumberPattern.test(input) ? true : '올바른 휴대폰 번호를 입력해주세요';
 };
+
+export const validBirthCheck = (input: string) => {
+  const validBirthPattern = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])$/;
+  return validBirthPattern.test(input) ? true : '올바른 생년월일을 입력해주세요.';
+};

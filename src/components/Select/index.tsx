@@ -11,6 +11,7 @@ export const Select = forwardRef(
       <FlexWrapper>
         <Title>{title}</Title>
         <StyledSelect {...props} ref={ref}>
+          <option value="">선택</option>
           {optionList.map((item) => {
             return <option key={item}>{item}</option>;
           })}
