@@ -2,6 +2,7 @@ import { ChatList } from 'pages/Chat';
 import { EditProfile } from 'pages/EditProfile';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
+import { Main } from 'pages/Main';
 import { SignUp } from 'pages/SignUp';
 import { TeamList } from 'pages/Team';
 import { useEffect } from 'react';
@@ -25,12 +26,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<SelectLogin />} />
-          <Route path="/main" element={<ChatList />} />
+          <Route path="/main" element={<Main />} />
           <Route path="/normallogin" element={<NormalLogin />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/editprofile" element={<EditProfile />} />
-          <Route path="/teamlist" element={<TeamList />} />
-          <Route path="/chatlist" element={<ChatList />} />
+          <Route path="/team" element={<TeamList />} />
+          <Route path="/chat" element={<ChatList />} />
         </Routes>
       </BrowserRouter>
     </AppWrapper>

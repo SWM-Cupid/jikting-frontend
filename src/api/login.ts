@@ -9,6 +9,7 @@ export const fetchLogin = async ({ username, password }: Props) => {
   const data = await unauthenticated.post('/members/login', { username, password });
   const accessToken = data.headers['authorization'];
   const refreshToken = data.headers['authorization-refresh'];
-  authenticated.defaults.headers['Authorization'] = `Bearer ${accessToken}`;
+
+  localStorage.setItem('actk', `Bearer ${accessToken}`);
   sessionStorage.setItem('rftk', refreshToken);
 };
