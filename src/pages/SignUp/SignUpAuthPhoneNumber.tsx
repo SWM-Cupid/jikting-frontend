@@ -2,19 +2,15 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Form } from './style';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { validNameCheck, validPhoneNumberCheck } from 'validation';
-import { fetchSendCode, fetchVerificationCode } from 'api/signup';
+import { fetchSendCode, fetchSignup, fetchVerificationCode } from 'api/signup';
+import { UserInfo } from '.';
+import { isAxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
-  userInfo: {
-    userId: string;
-    userPassword: string;
-    userNickName: string;
-    userName: string;
-    userPhoneNumber: string;
-    userGender: string;
-  };
+  userInfo: UserInfo;
   updateUserInfo(data: { [userData: string]: string }): void;
 }
 
@@ -25,25 +21,31 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: 'onBlur' });
+  const navigate = useNavigate();
 
   const sendCode = async (phone: string) => {
     setIsSendCode(await fetchSendCode(phone));
   };
 
-  const onSubmit = (data: { [key: string]: string }) => {
+  const onSubmit = async (data: { [key: string]: string }) => {
     if (!isSendCode) {
       sendCode(data.userPhoneNumber);
       return;
     }
 
-    fetchVerificationCode(data.userPhoneNumber, data.verificationCode)
-      .then(() => {
-        delete data.verificationCode;
-        updateUserInfo(data);
-      })
-      .catch(({ response }) => {
-        errors.verificationCode = response.message;
+    try {
+      fetchVerificationCode(data.userPhoneNumber, data.verificationCode);
+      delete data.verificationCode;
+      updateUserInfo(data);
+      fetchSignup({ ...userInfo, ...data }).then(() => {
+        alert('회원가입 완료되었습니다..!');
+        navigate('/normallogin');
       });
+    } catch (error) {
+      if (isAxiosError(error)) {
+        alert(error.response?.data.message);
+      }
+    }
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

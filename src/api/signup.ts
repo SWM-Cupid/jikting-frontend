@@ -1,3 +1,4 @@
+import { UserInfo } from 'pages/SignUp';
 import { unauthenticated } from './axiosInstance';
 
 export const fetchUserNameCheck = async (username: string) => {
@@ -29,4 +30,16 @@ export const fetchSendCode = async (phone: string) => {
 
 export const fetchVerificationCode = async (phone: string, verificationCode: string) => {
   return await unauthenticated.post('/members/verification', { phone, verificationCode });
+};
+
+export const fetchSignup = async (userInfo: UserInfo) => {
+  const { userId, userPassword, userNickName, userName, userPhoneNumber, userGender } = userInfo;
+  return await unauthenticated.post('members', {
+    username: userId,
+    password: userPassword,
+    nickname: userNickName,
+    name: userName,
+    phone: userPhoneNumber,
+    gender: userGender,
+  });
 };
