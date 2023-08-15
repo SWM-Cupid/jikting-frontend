@@ -11,7 +11,7 @@ export const SelectLogin = () => {
   };
 
   const handleNormalLogin = () => {
-    navigate('/normalLogin');
+    navigate('/normallogin');
   };
 
   const handleFindIdClick = () => {
