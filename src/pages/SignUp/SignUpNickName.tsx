@@ -10,7 +10,7 @@ interface Props {
   handleNextClick(): void;
   updateUserInfo(data: { [userData: string]: string }): void;
 }
-const genderList = ['남성', '여성'];
+const genderList = ['남', '여'];
 
 export const SignUpNickName = ({ updateUserInfo, handleNextClick }: Props) => {
   const [selectedGender, setSelectedGender] = useState('');
