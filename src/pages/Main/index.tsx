@@ -58,7 +58,7 @@ export const Main = () => {
 
         <S.SlideContainer ref={slideContainerRef}>
           {members.map((member, idx) => {
-            return <SlideItem key={idx} member={member} idx={idx}></SlideItem>;
+            return <SlideItem key={idx} member={member}></SlideItem>;
           })}
         </S.SlideContainer>
 

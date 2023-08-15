@@ -1,7 +1,7 @@
 import { Member } from 'api/main';
 import * as S from './style';
 
-export const SlideItem = ({ member, idx }: { member: Member; idx: number }) => {
+export const SlideItem = ({ member }: { member: Member }) => {
   const {
     nickname,
     age,
@@ -18,7 +18,7 @@ export const SlideItem = ({ member, idx }: { member: Member; idx: number }) => {
     images,
   } = member;
   return (
-    <S.SlideItem imageurl={images[idx].url}>
+    <S.SlideItem imageurl={images[0].url}>
       <S.Member>
         <S.FlexRow>
           <S.Name>{`${nickname} ·`}&nbsp;</S.Name>
