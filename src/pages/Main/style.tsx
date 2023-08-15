@@ -14,6 +14,7 @@ export const MainWrapper = styled(FlexColum)`
   align-items: center;
   gap: 1rem;
   overflow-y: auto;
+  padding-bottom: 4.2rem;
 `;
 
 export const TeamInfo = styled(FlexColum)`
