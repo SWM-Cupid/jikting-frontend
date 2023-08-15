@@ -2,7 +2,7 @@ import { Button } from 'components/Button';
 import { Input } from 'components/Input';
 import { Form } from './style';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { validNameCheck, validPhoneNumberCheck } from 'validation';
 import { fetchSendCode, fetchVerificationCode } from 'api/signup';
 
@@ -36,7 +36,7 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
       return;
     }
 
-    fetchVerificationCode(data.verificationCode)
+    fetchVerificationCode(data.userPhoneNumber, data.verificationCode)
       .then(() => {
         delete data.verificationCode;
         updateUserInfo(data);
@@ -44,8 +44,6 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
       .catch(({ response }) => {
         errors.verificationCode = response.message;
       });
-
-    // TODO: 회원가입
   };
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

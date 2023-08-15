@@ -20,13 +20,13 @@ export const fetchNickNameCheck = async (nickname: string) => {
 
 export const fetchSendCode = async (phone: string) => {
   try {
-    await unauthenticated.post('/members/code', { phone });
+    await unauthenticated.post('/members/code', { to: phone });
     return true;
   } catch {
     return false;
   }
 };
 
-export const fetchVerificationCode = async (verificationCode: string) => {
-  return await unauthenticated.post('/members/verification', { verificationCode });
+export const fetchVerificationCode = async (phone: string, verificationCode: string) => {
+  return await unauthenticated.post('/members/verification', { phone, verificationCode });
 };
