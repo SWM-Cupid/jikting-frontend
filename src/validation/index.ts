@@ -4,7 +4,7 @@ export const validIdCheck = (input: string) => {
 };
 
 export const validPasswordCheck = (input: string) => {
-  const validPasswordPattern = /^[a-zA-Z0-9!@#$%^&*]{10,}$/;
+  const validPasswordPattern = /(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%#?&])[A-Za-z\d!@#$%^&*]{10,}/;
   return validPasswordPattern.test(input) ? true : '10자이상 영문 대/소문자,숫자,특수문자를 입력해주세요';
 };
 
