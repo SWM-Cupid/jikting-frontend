@@ -5,9 +5,18 @@ import { SignUpIdPassword } from './SignUpIdPassword';
 import { SignUpNickName } from './SignUpNickName';
 import { SignUpAuthPhoneNumber } from './SignUpAuthPhoneNumber';
 
+export interface UserInfo {
+  userId: string;
+  userPassword: string;
+  userNickName: string;
+  userName: string;
+  userPhoneNumber: string;
+  userGender: string;
+}
+
 export const SignUp = () => {
   const [step, setStep] = useState(1);
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     userId: '',
     userPassword: '',
     userNickName: '',
