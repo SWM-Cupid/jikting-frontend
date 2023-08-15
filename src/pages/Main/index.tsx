@@ -8,6 +8,7 @@ import Ignore from 'assets/images/ignore.svg';
 import MainHeart from 'assets/images/mainheart.svg';
 import { useRecommendTeamQuery } from 'hooks/useMainQuery';
 import { SlideItem } from './SlideItem';
+import { NavBar } from 'components/NavBar';
 
 export const Main = () => {
   const { isLoading, data } = useRecommendTeamQuery();
@@ -75,6 +76,8 @@ export const Main = () => {
             <MainHeart />
           </ImageButton>
         </S.Likeable>
+
+        <NavBar defaultActive="main" />
       </S.MainWrapper>
     );
   }
