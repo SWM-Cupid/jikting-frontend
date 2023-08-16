@@ -8,4 +8,5 @@ export const NavBarWrapper = styled.div`
   padding: 0.5rem 0rem;
   width: ${Math.min(innerWidth * 0.1, 76.8)}rem;
   background: white;
+  border-top: 1px solid #fafafa;
 `;
