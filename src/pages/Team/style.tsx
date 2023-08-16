@@ -1,12 +1,23 @@
 import { styled } from 'styled-components';
 import { theme } from 'styles/theme';
 
+export const FlexRow = styled.div`
+  display: flex;
+`;
+
+export const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+`;
+
 export const TeamWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  gap: 1rem;
+  gap: 2rem;
+  padding-bottom: 6rem;
 `;
 
 export const NoTeamWrapper = styled.div`
@@ -39,11 +50,6 @@ export const Form = styled.form`
 `;
 
 /* TeamDetail */
-export const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
 
 export const Text = styled.div`
   display: flex;
@@ -54,6 +60,10 @@ export const Text = styled.div`
   line-height: 2.4rem;
 `;
 
+export const SectionWrapper = styled(FlexColumn)`
+  align-self: flex-start;
+`;
+
 export const Title = styled(Text)`
   font-weight: 700;
   margin-left: 1.5rem;
@@ -61,12 +71,17 @@ export const Title = styled(Text)`
 
 export const MemeberWrapper = styled.div`
   display: flex;
-  gap: 1.2rem;
+  flex-direction: column;
+  gap: 1.6rem;
   width: 37rem;
   height: 15rem;
   border-radius: 3.4rem;
   background: #fafafa;
   padding: 2rem 2rem;
+`;
+
+export const MemberRowWrapper = styled(FlexRow)`
+  gap: 1.6rem;
 `;
 
 export const Image = styled.img`
@@ -75,10 +90,6 @@ export const Image = styled.img`
   border-radius: 6rem;
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   background: lightgray 50% / cover no-repeat;
-`;
-
-export const FlexRow = styled.div`
-  display: flex;
 `;
 
 export const Name = styled(Text)`
@@ -97,12 +108,14 @@ export const InfoText = styled(Text)`
 
 export const KeywordWrapper = styled.div`
   display: flex;
+  align-self: flex-start;
+  padding-left: 1.5rem;
   gap: 1rem;
 `;
 
-export const Keyword = styled.div`
+export const TeamKeyword = styled.div`
   display: flex;
-  padding: 0.8rem 1.6rem;
+  padding: 0.6rem 1.2rem;
   gap: 0.4rem;
   border-radius: 1.8rem;
   background: #ffeef2;
@@ -114,7 +127,21 @@ export const Keyword = styled.div`
   line-height: 2rem;
 `;
 
-export const Description = styled.div`
+export const MemeberKeyword = styled.div`
+  display: flex;
+  padding: 0.6rem 1.2rem;
+  align-items: flex-start;
+  gap: 0.8rem;
+  border-radius: 1.4rem;
+  background: #fff;
+  backdrop-filter: blur(40px);
+  color: #666666;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.6rem;
+`;
+
+export const TeamDescription = styled.div`
   display: flex;
   align-self: flex-start;
   margin-left: 1.5rem;
@@ -123,4 +150,13 @@ export const Description = styled.div`
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 2.4rem;
+`;
+
+export const MemberDescription = styled.div`
+  color: #999;
+  font-family: Pretendard;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.6rem;
 `;
