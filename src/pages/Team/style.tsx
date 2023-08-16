@@ -61,7 +61,7 @@ export const Text = styled.div`
 `;
 
 export const SectionWrapper = styled(FlexColumn)`
-  align-self: flex-start;
+  width: 37rem;
 `;
 
 export const Title = styled(Text)`

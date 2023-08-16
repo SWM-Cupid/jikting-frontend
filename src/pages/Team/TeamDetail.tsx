@@ -20,6 +20,7 @@ interface ITeamDetail {
     company: string;
     drinkStatus: string;
     smokeStatus: string;
+    description: string;
   }[];
 }
 
@@ -31,7 +32,7 @@ export const TeamDetail = (props: ITeamDetail) => {
       <S.SectionWrapper>
         <S.Title>참여자</S.Title>
         {members.map((member) => {
-          const { age, address, image, mbti, nickname, company, drinkStatus, smokeStatus } = member;
+          const { age, address, image, mbti, nickname, company, drinkStatus, smokeStatus, description } = member;
           return (
             <S.MemeberWrapper key={nickname}>
               <S.MemberRowWrapper>
