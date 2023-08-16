@@ -92,11 +92,13 @@ export const RecentMessage = styled.div`
 /* chatroom */
 
 export const ChatRoomWrapper = styled(FlexColumn)`
-  position: relative;
+  position: absolute;
   height: 100dvh;
+  width: 100%;
   align-items: center;
   gap: 0.6rem;
   background: #fcdee2;
+  z-index: 10;
   /* background: #fafafa; */
 `;
 
