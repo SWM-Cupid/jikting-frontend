@@ -1,16 +1,20 @@
 import { ImageButton } from 'components/Button';
 import Leftarrow from 'assets/images/leftarrow.svg';
 import * as S from './style';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   previous?: boolean;
+  previousFunction?(): void;
   children?: React.ReactNode;
   title?: string;
 }
 
-export const Header = ({ previous, children, title = '' }: Props) => {
+export const Header = ({ previous, previousFunction, children, title = '' }: Props) => {
+  const navigate = useNavigate();
+
   const handlePreviousClick = () => {
-    // 뒤로 가기 기능
+    previousFunction ? previousFunction() : navigate(-1);
   };
 
   return (

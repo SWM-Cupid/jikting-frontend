@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 export const Header = styled.header`
   position: sticky;
   display: flex;
-  padding: 3rem 1rem;
+  padding: 3rem 2rem;
   justify-content: space-between;
   align-items: center;
   width: 100%;

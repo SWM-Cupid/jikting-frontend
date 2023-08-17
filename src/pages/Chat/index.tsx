@@ -19,15 +19,15 @@ export const ChatList = () => {
     setEnterChatRoomId(chattingRoomId);
   };
 
+  const previousHandleClick = () => {
+    setEnterChatRoomId(0);
+  };
+
   if (isSuccess && data) {
     const chatList = data.data;
     return (
       <S.ChatWrapper>
         <Header title="채팅" />
-        {/* <S.TeamButton>
-        <Button size="small" title="팀 이름1" onClick={hanldeTeamButtonClick}></Button>
-        <Button size="small" title="팀 이름2" onClick={hanldeTeamButtonClick}></Button>
-      </S.TeamButton> */}
         {chatList.map((team: ITeam) => {
           const { chattingRoomId, opposingTeamName, lastMessage, images } = team;
           return (
@@ -36,8 +36,6 @@ export const ChatList = () => {
                 {images.map((image) => (
                   <S.Image src={image} key={image} />
                 ))}
-                <S.Image />
-                <S.Image />
               </S.ImagesWrapper>
               <S.FlexColumnGrow>
                 <S.TeamName>{opposingTeamName}</S.TeamName>
@@ -47,7 +45,9 @@ export const ChatList = () => {
           );
         })}
         <NavBar defaultActive="chat" />
-        {enterChatRoomId ? <ChatRoom chattingRoomId={enterChatRoomId} /> : null}
+        {enterChatRoomId ? (
+          <ChatRoom chattingRoomId={enterChatRoomId} previousHandleClick={previousHandleClick} />
+        ) : null}
       </S.ChatWrapper>
     );
   }

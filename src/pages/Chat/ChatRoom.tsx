@@ -12,7 +12,13 @@ interface Member {
   nickname: string;
 }
 
-export const ChatRoom = ({ chattingRoomId }: { chattingRoomId: number }) => {
+export const ChatRoom = ({
+  chattingRoomId,
+  previousHandleClick,
+}: {
+  chattingRoomId: number;
+  previousHandleClick?(): void;
+}) => {
   const [openSideBar, setOpenSideBar] = useState(false);
   const { isLoading, isSuccess, data } = useChatRoomQuery(23);
 
@@ -46,7 +52,7 @@ export const ChatRoom = ({ chattingRoomId }: { chattingRoomId: number }) => {
   if (isSuccess && data)
     return (
       <S.ChatRoomWrapper>
-        <Header previous>
+        <Header previous previousFunction={previousHandleClick}>
           <ImageButton onClick={handleSideBarClick}>
             <Menu />
           </ImageButton>
