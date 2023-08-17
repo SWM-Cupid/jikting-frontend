@@ -19,6 +19,10 @@ export const ChatList = () => {
     setEnterChatRoomId(chattingRoomId);
   };
 
+  const previousHandleClick = () => {
+    setEnterChatRoomId(0);
+  };
+
   if (isSuccess && data) {
     const chatList = data.data;
     return (
@@ -41,7 +45,9 @@ export const ChatList = () => {
           );
         })}
         <NavBar defaultActive="chat" />
-        {enterChatRoomId ? <ChatRoom chattingRoomId={enterChatRoomId} /> : null}
+        {enterChatRoomId ? (
+          <ChatRoom chattingRoomId={enterChatRoomId} previousHandleClick={previousHandleClick} />
+        ) : null}
       </S.ChatWrapper>
     );
   }
