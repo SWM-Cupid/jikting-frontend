@@ -3,13 +3,15 @@ import * as S from './style';
 import { NavBar } from 'components/NavBar';
 import RightArrow from 'assets/images/rightarrow.svg';
 import { useQueryMyInfo } from 'hooks/useMypageQuery';
+import { useNavigate } from 'react-router-dom';
 
 export const Mypage = () => {
   const { data } = useQueryMyInfo();
+  const navigate = useNavigate();
 
-  const MenuList2 = [];
-
-  const MenuList = ['프로필 정보 수정', '비밀번호 변경', '로그아웃', '회원탈퇴'];
+  const handleProfileEditClick = () => {
+    navigate('/editprofile');
+  };
 
   if (data) {
     const { nickname, company, imageUrl } = data.data;
@@ -36,17 +38,33 @@ export const Mypage = () => {
             </S.MenuContentWrapper>
           </S.MenuItem>
 
-          {MenuList.map((menu) => {
-            return (
-              <S.MenuItem key={menu}>
-                <S.MenuTitle>{menu}</S.MenuTitle>
-                <S.MenuContentWrapper>
-                  <S.MenuContent></S.MenuContent>
-                  <RightArrow />
-                </S.MenuContentWrapper>
-              </S.MenuItem>
-            );
-          })}
+          <S.MenuItem onClick={handleProfileEditClick}>
+            <S.MenuTitle>프로필 정보 수정</S.MenuTitle>
+            <S.MenuContentWrapper>
+              <RightArrow />
+            </S.MenuContentWrapper>
+          </S.MenuItem>
+
+          <S.MenuItem>
+            <S.MenuTitle>비밀번호 변경</S.MenuTitle>
+            <S.MenuContentWrapper>
+              <RightArrow />
+            </S.MenuContentWrapper>
+          </S.MenuItem>
+
+          <S.MenuItem>
+            <S.MenuTitle>로그아웃</S.MenuTitle>
+            <S.MenuContentWrapper>
+              <RightArrow />
+            </S.MenuContentWrapper>
+          </S.MenuItem>
+
+          <S.MenuItem>
+            <S.MenuTitle>회원탈퇴</S.MenuTitle>
+            <S.MenuContentWrapper>
+              <RightArrow />
+            </S.MenuContentWrapper>
+          </S.MenuItem>
         </S.MenuItemWrapper>
 
         <NavBar defaultActive="mypage" />
