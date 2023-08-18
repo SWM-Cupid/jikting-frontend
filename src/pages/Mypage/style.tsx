@@ -24,6 +24,10 @@ export const ProfileImage = styled.img`
   object-fit: cover;
 `;
 
+export const MenuItemWrapper = styled(FlexColumn)`
+  width: 100%;
+`;
+
 export const MenuItem = styled(FlexRow)`
   width: 100%;
   height: 6.4rem;
