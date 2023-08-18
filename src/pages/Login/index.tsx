@@ -27,12 +27,13 @@ export const SelectLogin = () => {
   };
   return (
     <S.LoginWrapper>
-      <div>Logo</div>
+      <S.LogoWrapper>
+        <S.Logo src="src/assets/images/jikting.png" width="65%" />
+      </S.LogoWrapper>
       <S.ButtonWrapper>
         <ImageButton onClick={handleKakaoLoginClick}>
           <img src={kakao_login}></img>
         </ImageButton>
-
         <S.NormalLoginButton onClick={handleNormalLogin}>직팅 로그인</S.NormalLoginButton>
         <S.SubButtonWrapper>
           <Button title="아이디 찾기" size="small" background="none" color="#666" onClick={handleFindIdClick}></Button>
