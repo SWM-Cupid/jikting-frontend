@@ -26,6 +26,8 @@ export interface Member {
 interface Recommend {
   recommendId: number;
   members: Member[];
+  name: string;
+  description: string;
   personalities: string[];
 }
 
