@@ -11,7 +11,7 @@ import { SlideItem } from './SlideItem';
 import { NavBar } from 'components/NavBar';
 
 export const Main = () => {
-  const { isLoading, data } = useRecommendTeamQuery();
+  const { data } = useRecommendTeamQuery();
   const [selected, setSelected] = useState(0);
   const slideContainerRef = useRef<HTMLDivElement>(null);
 
@@ -38,17 +38,15 @@ export const Main = () => {
     }
   }, [debounceScroll]);
 
-  if (isLoading) return <div>로딩중..!</div>;
-
   if (data) {
-    const { members, personalities } = data.data[0];
+    const { members, name, personalities, description } = data.data[0];
     return (
       <S.MainWrapper>
         <Header title="오늘의 추천" />
 
         <S.TeamInfo>
-          <S.TeamName>큐피드 저격수들</S.TeamName>
-          <S.TeamDescription>세상을 움직이는 최고급 SW 인재양성의 메카</S.TeamDescription>
+          <S.TeamName>{name}</S.TeamName>
+          <S.TeamDescription>{description}</S.TeamDescription>
           <S.TeamKeyword>
             {personalities.map((personality) => (
               <KeywordItem key={personality} itemName={personality} selected />
