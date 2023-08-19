@@ -5,9 +5,10 @@ import { useRef, useState } from 'react';
 
 interface Props {
   size: 'medium' | 'small';
+  getUploadedImage(inputUploadedImage: File): void;
 }
 
-export const UploadImage = ({ size }: Props) => {
+export const UploadImage = ({ size, getUploadedImage }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const previewRef = useRef<HTMLDivElement | null>(null);
   const [isUploadImage, setIsUploadImage] = useState(false);
@@ -16,8 +17,10 @@ export const UploadImage = ({ size }: Props) => {
     if (!e.target.files) return;
 
     if (previewRef.current) {
-      previewRef.current.style.backgroundImage = `url(${URL.createObjectURL(e.target.files[0])})`;
+      const inputUploadedImage = e.target.files[0];
+      previewRef.current.style.backgroundImage = `url(${URL.createObjectURL(inputUploadedImage)})`;
       setIsUploadImage(true);
+      getUploadedImage(inputUploadedImage);
     }
   };
 
