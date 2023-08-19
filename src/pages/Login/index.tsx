@@ -1,5 +1,6 @@
 import { Button, ImageButton } from 'components/Button';
 import kakao_login from 'assets/images/kakao_login.png';
+import jikting from 'assets/images/jikting.png';
 import * as S from './style';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,7 +29,7 @@ export const SelectLogin = () => {
   return (
     <S.LoginWrapper>
       <S.LogoWrapper>
-        <S.Logo src="src/assets/images/jikting.png" width="65%" />
+        <S.Logo src={jikting} width="65%" />
       </S.LogoWrapper>
       <S.ButtonWrapper>
         <ImageButton onClick={handleKakaoLoginClick}>

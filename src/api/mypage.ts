@@ -11,3 +11,11 @@ export const fetchMyInfo = async () => {
   const response: AxiosResponse<MyInfo> = await authenticated.get('/members');
   return response;
 };
+
+export const fetchEditProfile = async (data: FormData) => {
+  await authenticated.post('/members/profile', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+};

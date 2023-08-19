@@ -10,6 +10,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { validBirthCheck } from 'validation';
 import { Input } from 'components/Input';
+import { fetchEditProfile } from 'api/mypage';
 
 const MBTI_LIST = [
   'INTJ',
@@ -34,37 +35,45 @@ const SMOCKING_OPTION_LIST = ['흡연', '비흡연'];
 const PERSONALITY_LIST = ['다정한', '활발한', '유머러스한', '내성적인', '외향적인'];
 const HOBBY_LIST = ['등산', '클라이밍', '게임', '러닝', '영화감상', '음악감상', '여행'];
 
+interface EditProfileInfo {
+  image: File;
+  birth: string;
+  height: number;
+  mbti: string;
+  address: string;
+  gender: string;
+  college: string;
+  drinkStatus: string;
+  smokeStatus: string;
+  description: string;
+  personalities: string[];
+  hobbies: string[];
+}
+
 export const EditProfile = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IForm>();
+  } = useForm<EditProfileInfo>();
   const [personalities, setPersonalities] = useState<string[]>([]);
   const [hobbies, setHobbies] = useState<string[]>([]);
+  const [uploadedIamge, setUploadedImage] = useState<File | null>();
 
-  interface IForm {
-    birth: string;
-    height: number;
-    mbti: string;
-    address: string;
-    gender: string;
-    college: string;
-    drinkStatus: string;
-    description: string;
-    personalities: string[];
-    hobbies: string[];
-    images: { url: string; sequence: string }[];
-    smoke: string;
-  }
-
-  const onSubmit: SubmitHandler<IForm> = (data: IForm) => {
+  const onSubmit: SubmitHandler<EditProfileInfo> = (data: EditProfileInfo) => {
     const age = data.birth;
-    data.birth = `${age.slice(0, 4)}.${age.slice(4, 6)}.${age.slice(6)}`;
+    data.birth = `${age.slice(0, 4)}-${age.slice(4, 6)}-${age.slice(6)}`;
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
     data['personalities'] = personalities;
-    console.log(data);
+
+    const formData = new FormData();
+    if (uploadedIamge) {
+      formData.append('file', uploadedIamge);
+      formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+
+      fetchEditProfile(formData);
+    }
   };
 
   const getPersonalities = (selectedKeywords: string[]) => {
@@ -75,11 +84,14 @@ export const EditProfile = () => {
     setHobbies(selectedKeywords);
   };
 
+  const getUploadedImage = (inputUploadedImage: File) => {
+    setUploadedImage(inputUploadedImage);
+  };
   return (
     <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
       <Header previous title="프로필 수정" />
       <S.UploadImageWrapper>
-        <UploadImage size="medium" />
+        <UploadImage size="medium" getUploadedImage={getUploadedImage} />
       </S.UploadImageWrapper>
       <Input
         title="생년월일"
@@ -101,7 +113,7 @@ export const EditProfile = () => {
       />
       <Select title="MBTI" optionList={MBTI_LIST} {...register('mbti', { required: true })} />
       <Select title="음주여부" optionList={DRINKING_OPTION_List} {...register('drinkStatus', { required: true })} />
-      <Select title="흡연여부" optionList={SMOCKING_OPTION_LIST} {...register('smoke', { required: true })} />
+      <Select title="흡연여부" optionList={SMOCKING_OPTION_LIST} {...register('smokeStatus', { required: true })} />
       <Input title="출신대학교(선택)" {...register('college')} />
       <Keyword
         title="성격"

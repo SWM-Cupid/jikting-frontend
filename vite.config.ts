@@ -5,5 +5,8 @@ import svgr from 'vite-plugin-svgr';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  define: {
+    _global: {},
+  },
   plugins: [react(), tsconfigPaths(), svgr({ exportAsDefault: true })],
 });
