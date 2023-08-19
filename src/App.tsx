@@ -3,6 +3,7 @@ import { EditProfile } from 'pages/EditProfile';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
 import { Main } from 'pages/Main';
+import { Mypage } from 'pages/Mypage';
 import { SignUp } from 'pages/SignUp';
 import { TeamList } from 'pages/Team';
 import { useEffect } from 'react';
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/team" element={<TeamList />} />
           <Route path="/chat" element={<ChatList />} />
+          <Route path="/mypage" element={<Mypage />} />
         </Routes>
       </BrowserRouter>
     </AppWrapper>
