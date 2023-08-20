@@ -2,7 +2,7 @@ import { fetchRecommendTeam } from 'api/main';
 import { useQuery } from 'react-query';
 
 export const useRecommendTeamQuery = () => {
-  const { data, isLoading } = useQuery(['recommendTeam'], fetchRecommendTeam, {
+  const { data } = useQuery(['recommendTeam'], fetchRecommendTeam, {
     onSuccess: ({ data }) => {
       console.log(data);
     },
@@ -11,5 +11,5 @@ export const useRecommendTeamQuery = () => {
     },
   });
 
-  return { data, isLoading };
+  return data?.data;
 };

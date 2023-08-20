@@ -20,23 +20,6 @@ export const TeamWrapper = styled.div`
   padding-bottom: 6rem;
 `;
 
-export const NoTeamWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  position: relative;
-  top: ${innerHeight * 0.03}rem;
-  align-items: center;
-`;
-
-export const NoTeamDiv = styled.div`
-  color: #ccc;
-  text-align: center;
-  font-size: 2.4rem;
-  font-weight: 500;
-  line-height: 2.8rem;
-`;
-
 export const ButtonWrapper = styled.div`
   position: fixed;
   bottom: 10%;
