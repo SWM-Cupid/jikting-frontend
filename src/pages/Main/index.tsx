@@ -4,14 +4,15 @@ import { KeywordItem } from 'components/Keyword/KeywordItem';
 import { useEffect, useRef, useState } from 'react';
 import { debounce } from 'lodash';
 import { ImageButton } from 'components/Button';
-import Ignore from 'assets/images/ignore.svg';
-import MainHeart from 'assets/images/mainheart.svg';
+import Pass from 'assets/images/ignore.svg';
+import Like from 'assets/images/mainheart.svg';
 import { useRecommendTeamQuery } from 'hooks/useMainQuery';
 import { SlideItem } from './SlideItem';
 import { NavBar } from 'components/NavBar';
+import { fetchSendLike, fetchSendPass } from 'api/main';
 
 export const Main = () => {
-  const { data } = useRecommendTeamQuery();
+  const data = useRecommendTeamQuery();
   const [selected, setSelected] = useState(0);
   const slideContainerRef = useRef<HTMLDivElement>(null);
 
@@ -39,7 +40,15 @@ export const Main = () => {
   }, [debounceScroll]);
 
   if (data) {
-    const { members, name, personalities, description } = data.data[0];
+    const { members, name, personalities, description, recommendId } = data[0];
+
+    const handlePassClick = () => {
+      fetchSendPass(recommendId);
+    };
+
+    const handleLikeClick = () => {
+      fetchSendLike(recommendId);
+    };
     return (
       <S.MainWrapper>
         <Header title="오늘의 추천" />
@@ -67,11 +76,11 @@ export const Main = () => {
         </S.DotsWrapper>
 
         <S.Likeable>
-          <ImageButton>
-            <Ignore />
+          <ImageButton onClick={handlePassClick}>
+            <Pass />
           </ImageButton>
-          <ImageButton>
-            <MainHeart />
+          <ImageButton onClick={handleLikeClick}>
+            <Like />
           </ImageButton>
         </S.Likeable>
 

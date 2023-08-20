@@ -37,3 +37,11 @@ export const fetchRecommendTeam = async () => {
   const response: AxiosResponse<Data> = await authenticated.get('/recommends');
   return response;
 };
+
+export const fetchSendLike = async (recommendId: number) => {
+  await authenticated.post(`/recommends/${recommendId}/like`);
+};
+
+export const fetchSendPass = async (recommendId: number) => {
+  await authenticated.post(`/recommends/${recommendId}/pass`);
+};
