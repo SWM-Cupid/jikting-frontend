@@ -30,6 +30,8 @@ module.exports = {
   plugins: ['react-refresh', 'import'],
   rules: {
     'react-refresh/only-export-components': 'warn',
+    // stomp/stompjs 오류 때문에 설정
+    'import/no-unresolved': 'off',
   },
   settings: {
     // node import 경로 설정
