@@ -7,10 +7,12 @@ import { useCallback, useState } from 'react';
 import { CreateTeam } from './CreateTeam';
 import { useQueryTeamInfo } from 'hooks/useTeamInfoQurey';
 import { TeamDetail } from './TeamDetail';
+import { EmptyData } from 'components/EmptyData';
 
 export const TeamList = () => {
   const { isSuccess, isError, data } = useQueryTeamInfo();
   const [registerTeam, setRegisterTeam] = useState(false);
+
   const handleRegisterTeamClick = useCallback(() => {
     setRegisterTeam(true);
   }, []);
@@ -26,7 +28,7 @@ export const TeamList = () => {
       <>
         <S.TeamWrapper>
           <Header title="팀 리스트" />
-          <NoTeam />
+          <EmptyData message={'소속된 팀이 없습니다 <br /> 팀을 만들어보세요'} />
           <NavBar defaultActive="team" />
           <S.ButtonWrapper>
             <Button
@@ -42,15 +44,4 @@ export const TeamList = () => {
     );
 
   if (isSuccess && data) return <TeamDetail {...data.data} />;
-};
-
-const NoTeam = () => {
-  return (
-    <S.NoTeamWrapper>
-      <img src="src/assets/images/sad.png" width="100px" height="100px"></img>
-      <S.NoTeamDiv>
-        소속된 팀이 없습니다 <br /> 팀을 만들어보세요
-      </S.NoTeamDiv>
-    </S.NoTeamWrapper>
-  );
 };
