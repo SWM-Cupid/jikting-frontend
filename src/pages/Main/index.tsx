@@ -10,6 +10,7 @@ import { useRecommendTeamQuery } from 'hooks/useMainQuery';
 import { SlideItem } from './SlideItem';
 import { NavBar } from 'components/NavBar';
 import { fetchSendLike, fetchSendPass } from 'api/main';
+import { EmptyData } from 'components/EmptyData';
 
 export const Main = () => {
   const data = useRecommendTeamQuery();
@@ -38,6 +39,16 @@ export const Main = () => {
       };
     }
   }, [debounceScroll]);
+
+  if (data?.length === 0) {
+    return (
+      <S.MainWrapper>
+        <Header title="오늘의 추천" />
+        <EmptyData message={'더 이상 추천할 팀이 없습니다!'} />
+        <NavBar defaultActive="main" />
+      </S.MainWrapper>
+    );
+  }
 
   if (data) {
     const { members, name, personalities, description, recommendId } = data[0];
