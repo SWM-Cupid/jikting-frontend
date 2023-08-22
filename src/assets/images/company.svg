@@ -1,9 +1,19 @@
-<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="16" height="16" fill="url(#pattern0)"/>
-<defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_414_2880" transform="scale(0.0104167)"/>
-</pattern>
-<image id="image0_414_2880" width="96" height="96" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAACf0lEQVR4nO2dTW4TQRSE+w4EROAgcAn+LC5ga16NZa8T2IXA+QKcBIzJIizAqKOJYkWaCI/H1Px8n1SrRJmequ73Wq2oJyUAAAAAAAAAAID/iKQjSecR8VnSpaTNgZT/9kV+1nK5fEDIKaWyLF9JWh3Q9Dp9j4iXaezmR8Rvg/nXqp79Io247Kxc5m+F8G2U5SjXYZnN39JZGhuSvnTA+BtdpLEhaV1jxrNDPbMoiuc1ZehHGht1szEN9LmdgwDMEIAZAjBDAA2Yz+ePIuJTtYU85JnNpme6zOdY2ZvpdPowHYKyLN/es3VEut3SSpocwvw/GK1dzpgmrZUdZr6arPBVK+WoqvmUGDXy4LyNAL4SgBpNwNyY2wjgJwGoaQVY7x0A5muv8ksA8vYvAhABjHoHlegBIgD3LBQrwG+EKEF+M2QQPUAEYJ+FYgX4jRAlyG+GDKIHiADss1CsAL8RogT5zZBB9AARgH0WihXgN0KUIL8ZMogeIAJoZSZFxJWkE0nH9/wDwXFEnEr65TZ+iCvgZIcxv+vAeIcVwGKxePyvY86/6x7v4AJIIxk3AAAAAFzj3sZp7NtQ9wvoVrVHEHcpy/JpB8Y7rAAi4nSHMb93j3eIAVzlEGaz2ZO6seafVedAHMa5A1NHNJgVoJ6KAEQA9lkoVoDfCFGC/GbIIHqACMA+C8UK8BshSpDfDBlED1D/A+CeODUzv5UrkTt2yfamZ9r/UnBJHzvwIps+KiI+7B1AvniuuorR/kLql/LHKY72DqBaBRPnp0bUM1VevW7F/O0QuvDJEXVfq6Io3rRq/t3PTeXmwmV+2jZ9ffN5rNbKDgAAAAAAAAAApKHxFzSvWRmFz3z6AAAAAElFTkSuQmCC"/>
-</defs>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="16" height="16" viewBox="0 0 96.000000 96.000000"
+ preserveAspectRatio="xMidYMid meet" fill="#666666"> 
+
+<g transform="translate(0.000000,96.000000) scale(0.100000,-0.100000)"
+ stroke="none">
+<path d="M342 830 c-24 -10 -42 -46 -42 -85 0 -22 -3 -23 -90 -27 -125 -4
+-124 -3 -128 -178 l-4 -140 170 0 c161 0 170 1 175 20 4 17 14 20 57 20 43 0
+53 -3 57 -20 5 -19 14 -20 175 -20 l170 0 -4 140 c-4 175 -3 174 -127 178
+l-89 4 -5 40 c-9 68 -20 73 -165 75 -70 2 -137 -2 -150 -7z m258 -80 l0 -30
+-120 0 -120 0 0 30 0 30 120 0 120 0 0 -30z" />
+<path d="M82 250 c5 -135 -29 -125 398 -125 427 0 393 -10 398 125 l4 90 -170
+0 c-161 0 -170 -1 -175 -20 -4 -17 -14 -20 -57 -20 -43 0 -53 3 -57 20 -5 19
+-14 20 -175 20 l-170 0 4 -90z" />
+</g>
 </svg>

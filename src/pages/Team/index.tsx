@@ -28,7 +28,10 @@ export const TeamList = () => {
       <>
         <S.TeamWrapper>
           <Header title="팀 리스트" />
-          <EmptyData message={'소속된 팀이 없습니다 <br /> 팀을 만들어보세요'} />
+          <EmptyData>
+            <p>소속된 팀이 없습니다</p>
+            <p>팀을 만들어보세요</p>
+          </EmptyData>
           <NavBar defaultActive="team" />
           <S.ButtonWrapper>
             <Button

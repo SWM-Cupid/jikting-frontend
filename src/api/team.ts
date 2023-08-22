@@ -2,7 +2,7 @@ import { ICreateTeam } from 'pages/Team/CreateTeam';
 import { authenticated } from './axiosInstance';
 
 export const fetchTeamInfo = async () => {
-  const response = await authenticated.get('/teams/18');
+  const response = await authenticated.get('/teams');
   return response;
 };
 
