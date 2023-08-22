@@ -2,14 +2,22 @@ import { Header } from 'components/Header';
 import * as S from './style';
 import { ImageButton } from 'components/Button';
 import Menu from 'assets/images/menu.svg';
-import Send from 'assets/images/send.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useChatRoomQuery } from 'hooks/useChatQuery';
+import { Message } from '@stomp/stompjs';
+import { useStompClient } from 'hooks/useStompClient';
+import { EnterMessageForm } from './EnterMessage';
 
 interface Member {
-  memberId: number;
+  memberProfileId: number;
   image: string;
   nickname: string;
+}
+
+interface MessageBody {
+  chattingRoomId: number;
+  senderId: number;
+  content: string;
 }
 
 export const ChatRoom = ({
@@ -20,9 +28,13 @@ export const ChatRoom = ({
   previousHandleClick?(): void;
 }) => {
   const [openSideBar, setOpenSideBar] = useState(false);
-  const { isLoading, isSuccess, data } = useChatRoomQuery(23);
+  const [messageList, setMessageList] = useState<MessageBody[]>([]);
+  const { data } = useChatRoomQuery(chattingRoomId);
+  const { subscribe, publish } = useStompClient(chattingRoomId);
 
-  if (isLoading) return <div>로딩중...</div>;
+  useEffect(() => {
+    subscribe(showMessage);
+  }, [subscribe]);
 
   const toggleSideBar = () => {
     setOpenSideBar((openSideBar) => !openSideBar);
@@ -31,28 +43,21 @@ export const ChatRoom = ({
   const handleSideBarClick = () => {
     toggleSideBar();
   };
-  const members: Member[] = [
-    {
-      memberId: 1,
-      image: '이미지 주소1',
-      nickname: '닉네임1',
-    },
-    {
-      memberId: 2,
-      image: '이미지 주소2',
-      nickname: '닉네임2',
-    },
-    {
-      memberId: 3,
-      image: '이미지 주소3',
-      nickname: '닉네임3',
-    },
-  ];
 
-  if (isSuccess && data)
+  const sendMessage = (message: string) => {
+    publish(Number(localStorage.getItem('uid')), message);
+  };
+
+  const showMessage = (messageBody: Message) => {
+    const message = JSON.parse(messageBody.body) as MessageBody;
+    setMessageList((messageList) => [message, ...messageList]);
+  };
+
+  if (data) {
+    const { members }: { members: Member[] } = data.data;
     return (
       <S.ChatRoomWrapper>
-        <Header previous previousFunction={previousHandleClick}>
+        <Header previous previousFunction={previousHandleClick} title="큐피드 저격수들">
           <ImageButton onClick={handleSideBarClick}>
             <Menu />
           </ImageButton>
@@ -65,38 +70,42 @@ export const ChatRoom = ({
         </S.Notice>
 
         <S.Content>
-          <S.ChatRowRightAlign>
-            <S.FlexColumn>
-              <S.MyChat>아니야 못 가 아니야 못 가 아니야 못 가 아니야 못 가</S.MyChat>
-            </S.FlexColumn>
-          </S.ChatRowRightAlign>
+          {messageList.map((message, idx) => {
+            const { senderId, content } = message;
 
-          <S.ChatRowLeftAlign>
-            <S.ChatImage src="test" />
-            <S.FlexColumn>
-              <S.NickName>집보내줘</S.NickName>
-              <S.OtherChat>집가고 싶어</S.OtherChat>
-            </S.FlexColumn>
-          </S.ChatRowLeftAlign>
+            if (senderId === Number(localStorage.getItem('uid'))) {
+              return (
+                <S.ChatRowRightAlign key={idx}>
+                  <S.FlexColumn>
+                    <S.MyChat>{content}</S.MyChat>
+                  </S.FlexColumn>
+                </S.ChatRowRightAlign>
+              );
+            }
 
-          <S.ChatRowLeftAlign>
-            <S.ChatImage src="test" />
-            <S.FlexColumn>
-              <S.NickName>집보내줘</S.NickName>
-              <S.OtherChat>으ㅏㅇ아으ㅏ으ㅏ으ㅏㅡ아ㅡ아아ㅡ아ㅏ으아ㅏ으ㅏ으ㅏ</S.OtherChat>
-            </S.FlexColumn>
-          </S.ChatRowLeftAlign>
+            let profile = '';
+            members.map((member) => {
+              if (member.memberProfileId === senderId) {
+                profile = member.image;
+              }
+            });
+            return (
+              <S.ChatRowLeftAlign key={idx}>
+                <S.ChatImage src={profile} />
+                <S.FlexColumn>
+                  <S.NickName></S.NickName>
+                  <S.OtherChat>{content}</S.OtherChat>
+                </S.FlexColumn>
+              </S.ChatRowLeftAlign>
+            );
+          })}
         </S.Content>
 
-        <S.EnterMessage>
-          <S.ChatInput />
-          <ImageButton>
-            <Send />
-          </ImageButton>
-        </S.EnterMessage>
+        <EnterMessageForm sendMessage={sendMessage} />
         {openSideBar && <SideBar members={members} toggleSideBar={toggleSideBar} />}
       </S.ChatRoomWrapper>
     );
+  }
 };
 
 const SideBar = ({ members, toggleSideBar }: { members: Member[]; toggleSideBar(): void }) => {
@@ -106,9 +115,9 @@ const SideBar = ({ members, toggleSideBar }: { members: Member[]; toggleSideBar(
       <S.SideBarWrapper>
         <Header title="대화 상대" />
         {members.map((member) => {
-          const { memberId, image, nickname } = member;
+          const { memberProfileId, image, nickname } = member;
           return (
-            <S.ImageNickNameWrapper key={memberId}>
+            <S.ImageNickNameWrapper key={memberProfileId}>
               <S.Image src={image} />
               <S.NickName>{nickname}</S.NickName>
             </S.ImageNickNameWrapper>
