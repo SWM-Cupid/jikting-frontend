@@ -18,6 +18,8 @@ interface MessageBody {
   chattingRoomId: number;
   senderId: number;
   content: string;
+  createdDate?: string;
+  createdTime?: string;
 }
 
 export const ChatRoom = ({
@@ -28,14 +30,19 @@ export const ChatRoom = ({
   previousHandleClick?(): void;
 }) => {
   const [openSideBar, setOpenSideBar] = useState(false);
-  const [messageList, setMessageList] = useState<MessageBody[]>([]);
   const { data } = useChatRoomQuery(chattingRoomId);
   const { subscribe, publish } = useStompClient(chattingRoomId);
+  const [messageList, setMessageList] = useState<MessageBody[]>([]);
 
   useEffect(() => {
     subscribe(showMessage);
   }, [subscribe]);
 
+  useEffect(() => {
+    if (data) {
+      setMessageList(data.data.chattings);
+    }
+  }, [data]);
   const toggleSideBar = () => {
     setOpenSideBar((openSideBar) => !openSideBar);
   };
@@ -84,16 +91,18 @@ export const ChatRoom = ({
             }
 
             let profile = '';
+            let nickname = '';
             members.map((member) => {
               if (member.memberProfileId === senderId) {
                 profile = member.image;
+                nickname = member.nickname;
               }
             });
             return (
               <S.ChatRowLeftAlign key={idx}>
                 <S.ChatImage src={profile} />
                 <S.FlexColumn>
-                  <S.NickName></S.NickName>
+                  <S.NickName>{nickname}</S.NickName>
                   <S.OtherChat>{content}</S.OtherChat>
                 </S.FlexColumn>
               </S.ChatRowLeftAlign>
