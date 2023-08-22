@@ -11,11 +11,13 @@ import { SlideItem } from './SlideItem';
 import { NavBar } from 'components/NavBar';
 import { fetchSendLike, fetchSendPass } from 'api/main';
 import { EmptyData } from 'components/EmptyData';
+import { useQueryClient } from 'react-query';
 
 export const Main = () => {
   const data = useRecommendTeamQuery();
   const [selected, setSelected] = useState(0);
   const slideContainerRef = useRef<HTMLDivElement>(null);
+  const queryClient = useQueryClient();
 
   const handleScroll = () => {
     const ImageCardwidth = innerWidth * 0.85 + 9;
@@ -55,12 +57,14 @@ export const Main = () => {
   if (data) {
     const { members, name, personalities, description, recommendId } = data[0];
 
-    const handlePassClick = () => {
-      fetchSendPass(recommendId);
+    const handlePassClick = async () => {
+      await fetchSendPass(recommendId);
+      queryClient.invalidateQueries('recommendTeam');
     };
 
-    const handleLikeClick = () => {
-      fetchSendLike(recommendId);
+    const handleLikeClick = async () => {
+      await fetchSendLike(recommendId);
+      queryClient.invalidateQueries('recommendTeam');
     };
     return (
       <S.MainWrapper>
