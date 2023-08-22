@@ -44,7 +44,9 @@ export const Main = () => {
     return (
       <S.MainWrapper>
         <Header title="오늘의 추천" />
-        <EmptyData message={'더 이상 추천할 팀이 없습니다!'} />
+        <EmptyData>
+          <p>더 이상 추천할 팀이 없습니다!</p>
+        </EmptyData>
         <NavBar defaultActive="main" />
       </S.MainWrapper>
     );
