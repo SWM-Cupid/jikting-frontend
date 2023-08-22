@@ -13,6 +13,7 @@ export const FlexRow = styled.div`
 export const ChatWrapper = styled(FlexColumn)`
   align-items: center;
   gap: 0.6rem;
+  padding-bottom: 4.2rem;
 `;
 
 export const TeamButton = styled(FlexRow)`
