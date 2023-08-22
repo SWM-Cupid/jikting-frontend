@@ -1,5 +1,6 @@
 import { ChatList } from 'pages/Chat';
 import { EditProfile } from 'pages/EditProfile';
+import { Like } from 'pages/Like';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
 import { Main } from 'pages/Main';
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/team" element={<TeamList />} />
           <Route path="/chat" element={<ChatList />} />
           <Route path="/mypage" element={<Mypage />} />
+          <Route path="/like" element={<Like />} />
         </Routes>
       </BrowserRouter>
     </AppWrapper>
