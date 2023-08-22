@@ -206,7 +206,7 @@ export const OtherChat = styled(FlexRow)`
 `;
 
 export const MyChat = styled(FlexRow)`
-  padding: 0.6rem 0.6rem 0.6rem 1.4rem;
+  padding: 0.6rem 1rem 0.6rem 1.2rem;
   align-items: center;
   border-radius: 2.2rem 2.2rem 0.4rem 2.2rem;
   background: ${theme.colors.mainPink};
