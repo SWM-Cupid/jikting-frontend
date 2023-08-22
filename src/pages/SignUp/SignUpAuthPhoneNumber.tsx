@@ -34,7 +34,7 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
     }
 
     try {
-      fetchVerificationCode(data.userPhoneNumber, data.verificationCode);
+      await fetchVerificationCode(data.userPhoneNumber, data.verificationCode);
       delete data.verificationCode;
       updateUserInfo(data);
       fetchSignup({ ...userInfo, ...data }).then(() => {
