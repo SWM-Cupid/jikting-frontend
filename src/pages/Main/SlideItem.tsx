@@ -1,4 +1,7 @@
 import { Member } from 'api/main';
+import Company from 'assets/images/company.svg';
+import Drink from 'assets/images/drink.svg';
+import Smoke from 'assets/images/smoke.svg';
 import * as S from './style';
 
 export const SlideItem = ({ member }: { member: Member }) => {
@@ -27,7 +30,21 @@ export const SlideItem = ({ member }: { member: Member }) => {
         <S.MemberInfo>{`${height}cm · ${mbti} · ${college} · ${address}`}</S.MemberInfo>
         <S.MemberDescription>{description}</S.MemberDescription>
         <S.MemeberKeywordWrapper>
-          {[company, drinkStatus, smokeStatus, ...personalities, ...hobbies].map((keyword: string) => (
+          <S.MemberKeyword>
+            <Company fill="white" />
+            {company}
+          </S.MemberKeyword>
+          <S.MemberKeyword>
+            <Drink fill="white" />
+            {drinkStatus}
+          </S.MemberKeyword>
+          <S.MemberKeyword>
+            <Smoke fill="white" />
+            {smokeStatus}
+          </S.MemberKeyword>
+        </S.MemeberKeywordWrapper>
+        <S.MemeberKeywordWrapper>
+          {[...personalities, ...hobbies].map((keyword: string) => (
             <S.MemberKeyword key={keyword}>{keyword}</S.MemberKeyword>
           ))}
         </S.MemeberKeywordWrapper>
