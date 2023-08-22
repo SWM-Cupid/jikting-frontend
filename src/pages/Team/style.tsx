@@ -57,14 +57,15 @@ export const MemeberWrapper = styled.div`
   flex-direction: column;
   gap: 1.6rem;
   width: 37rem;
-  height: 15rem;
   border-radius: 3.4rem;
   background: #fafafa;
-  padding: 2rem 2rem;
+  padding: 1.6rem 0 1.2rem 0;
 `;
 
 export const MemberRowWrapper = styled(FlexRow)`
   gap: 1.6rem;
+  padding: 0 2rem;
+  align-items: center;
 `;
 
 export const Image = styled.img`
@@ -73,6 +74,7 @@ export const Image = styled.img`
   border-radius: 6rem;
   border: 0.5px solid rgba(0, 0, 0, 0.06);
   background: lightgray 50% / cover no-repeat;
+  flex-shrink: 0;
 `;
 
 export const Name = styled(Text)`
@@ -92,7 +94,7 @@ export const InfoText = styled(Text)`
 export const KeywordWrapper = styled.div`
   display: flex;
   align-self: flex-start;
-  padding-left: 1.5rem;
+  padding-left: 2rem;
   gap: 1rem;
 `;
 
