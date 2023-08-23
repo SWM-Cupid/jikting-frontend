@@ -22,7 +22,7 @@ export const NormalLogin = () => {
     const { username, password } = data;
     try {
       await mutateAsync({ username, password });
-      navigate('/main');
+      navigate('/team');
     } catch {
       // TODO: 로그인 실패 Modal 창 띄우기
       console.log('로그인 실패');
