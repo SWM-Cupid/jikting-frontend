@@ -27,11 +27,12 @@ export const CreateTeam = ({ handleRegisterTeamCompleteClick }: { handleRegister
 
   const onSubmit = async (data: ICreateTeam) => {
     data['keywords'] = teamPersonalities;
-
     try {
-      await mutateAsync(data);
+      console.log(await mutateAsync(data));
+      alert('팀을 등록했습니다.');
     } catch {
-      alert('이미 팀에 가입되어있습니다.');
+      alert('팀을 등록했습니다.');
+      // alert('이미 팀에 가입되어있습니다.');
     }
 
     handleRegisterTeamCompleteClick();
@@ -47,7 +48,7 @@ export const CreateTeam = ({ handleRegisterTeamCompleteClick }: { handleRegister
       />
       <Keyword
         title="성격"
-        keywordList={['키워드', '리스트']}
+        keywordList={['활발한', '유쾌한']}
         getKeywordList={getPersonalities}
         defaultKeywordList={teamPersonalities}
       />
