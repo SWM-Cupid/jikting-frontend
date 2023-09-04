@@ -6,20 +6,38 @@ import { theme } from 'styles/theme';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { validNickNameCheck } from 'validation';
 import { fetchNickNameCheck } from 'api/signup';
+import { fetchEditNickName } from 'api/mypage';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ModalPortal from 'components/Modal/ModalPortal';
+import { Modal } from 'components/Modal';
+import { useState } from 'react';
 
 interface NickName {
   nickname: string;
 }
 
-export const EditNickName = ({ nickname }: NickName) => {
+export const EditNickName = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<NickName>({ mode: 'onTouched' });
+    formState: { errors, isDirty },
+  } = useForm<NickName>({ mode: 'onTouched', defaultValues: { nickname: location.state.nickname } });
 
-  const onSubmit: SubmitHandler<NickName> = (data: NickName) => {
-    console.log(data);
+  const handleCloseModalClick = () => {
+    setModalOpen(false);
+    navigate(-1);
+  };
+
+  const onSubmit: SubmitHandler<NickName> = async (data: NickName) => {
+    try {
+      await fetchEditNickName(data);
+      setModalOpen(true);
+    } catch {
+      alert('오류!');
+    }
   };
   return (
     <EditNickNameWrapper onSubmit={handleSubmit(onSubmit)}>
@@ -27,14 +45,22 @@ export const EditNickName = ({ nickname }: NickName) => {
       <Input
         error={errors.nickname}
         {...register('nickname', {
-          value: nickname,
           required: true,
           validate: { validNickNameCheck, fetchNickNameCheck },
         })}
       />
       <ButtonWrapper>
-        <Button type="submit" background={theme.colors.mainPink} color="White" title="변경하기" />
+        {isDirty ? (
+          <Button type="submit" background={theme.colors.mainPink} title="변경하기" />
+        ) : (
+          <Button disabled={true} background="#cccccc" title="변경하기" />
+        )}
       </ButtonWrapper>
+      {modalOpen ? (
+        <ModalPortal>
+          <Modal title="닉네임 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} />
+        </ModalPortal>
+      ) : null}
     </EditNickNameWrapper>
   );
 };

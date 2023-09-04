@@ -19,3 +19,7 @@ export const fetchEditProfile = async (data: FormData) => {
     },
   });
 };
+
+export const fetchEditNickName = async (data: { nickname: string }) => {
+  return await authenticated.patch('/members', data);
+};
