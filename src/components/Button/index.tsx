@@ -6,11 +6,20 @@ interface ButtonProps extends ComponentProps<'button'> {
   width?: string;
   color?: string;
   background?: string;
+  disabled?: boolean;
   children?: ReactNode;
 }
 
-export const Button = ({ title, type, size = 'large', color = 'white', background = '#ddd', onClick }: ButtonProps) => (
-  <StyledButton type={type} size={size} color={color} background={background} onClick={onClick}>
+export const Button = ({
+  title,
+  type,
+  size = 'large',
+  color = 'white',
+  background = '#ddd',
+  disabled,
+  onClick,
+}: ButtonProps) => (
+  <StyledButton type={type} size={size} color={color} background={background} disabled={disabled} onClick={onClick}>
     {title}
   </StyledButton>
 );
