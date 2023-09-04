@@ -1,4 +1,5 @@
 import { ChatList } from 'pages/Chat';
+import { EditNickName } from 'pages/EditNickName';
 import { EditProfile } from 'pages/EditProfile';
 import { Like } from 'pages/Like';
 import { SelectLogin } from 'pages/Login';
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/normallogin" element={<NormalLogin />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/editprofile" element={<EditProfile />} />
+          <Route path="/editnickname" element={<EditNickName />} />
           <Route path="/team" element={<TeamList />} />
           <Route path="/chat" element={<ChatList />} />
           <Route path="/mypage" element={<Mypage />} />
