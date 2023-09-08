@@ -21,7 +21,7 @@ export const fetchNickNameCheck = async (nickname: string) => {
 
 export const fetchSendCode = async (phone: string) => {
   try {
-    await unauthenticated.post('/members/code', { to: phone });
+    await unauthenticated.post('/members/code', { phone: phone });
     return true;
   } catch {
     return false;
