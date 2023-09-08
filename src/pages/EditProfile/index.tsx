@@ -30,10 +30,50 @@ const MBTI_LIST = [
   'ESTP',
   'ESFP',
 ];
-const DRINKING_OPTION_List = ['자주 마심', '적당히 마심', '조금 마심', '금주'];
+const DRINKING_OPTION_LIST = ['자주 마심', '가끔 마심', '거의 마시지 않음', '전혀 마시지 않음'];
 const SMOCKING_OPTION_LIST = ['흡연', '비흡연'];
-const PERSONALITY_LIST = ['다정한', '활발한', '유머러스한', '내성적인', '외향적인'];
-const HOBBY_LIST = ['등산', '클라이밍', '게임', '러닝', '영화감상', '음악감상', '여행'];
+const PERSONALITY_LIST = [
+  '열정적인',
+  '상냥한',
+  '감성적인',
+  '애교많은',
+  '긍정적인',
+  '차분한',
+  '듬직한',
+  '4차원적인',
+  '털털한',
+  '활발한',
+  '웃음많은',
+  '솔직한',
+  '자상한',
+  '화끈한',
+  '섬세한',
+  '사교적인',
+  '센스있는',
+  '깔끔한',
+  '부지런한',
+  '재미있는',
+];
+const HOBBY_LIST = [
+  '독서',
+  '와인',
+  '음악감상',
+  '골프',
+  '공연/전시',
+  '영화',
+  '여행',
+  '자기계발',
+  '드라이브',
+  '헬스',
+  '사진 찍기',
+  '악기 연주',
+  '카공',
+  '맛집 탐방',
+  '등산',
+  '클라이밍',
+  '게임',
+  '러닝',
+];
 
 interface EditProfileInfo {
   image: File;
@@ -112,7 +152,7 @@ export const EditProfile = () => {
         {...register('address', { required: '거주지 입력은 필수 입니다.' })}
       />
       <Select title="MBTI" optionList={MBTI_LIST} {...register('mbti', { required: true })} />
-      <Select title="음주여부" optionList={DRINKING_OPTION_List} {...register('drinkStatus', { required: true })} />
+      <Select title="음주여부" optionList={DRINKING_OPTION_LIST} {...register('drinkStatus', { required: true })} />
       <Select title="흡연여부" optionList={SMOCKING_OPTION_LIST} {...register('smokeStatus', { required: true })} />
       <Input title="출신대학교(선택)" {...register('college')} />
       <Keyword
