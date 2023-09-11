@@ -12,6 +12,9 @@ import { validBirthCheck } from 'validation';
 import { Input } from 'components/Input';
 import { fetchEditProfile } from 'api/mypage';
 import { useQueryMyProfileInfo } from 'hooks/useMypageQuery';
+import ModalPortal from 'components/Modal/ModalPortal';
+import { Modal } from 'components/Modal';
+import { useNavigate } from 'react-router-dom';
 
 const MBTI_LIST = [
   'INTJ',
@@ -101,7 +104,9 @@ export const EditProfile = () => {
 
   const [personalities, setPersonalities] = useState<string[]>([]);
   const [hobbies, setHobbies] = useState<string[]>([]);
-  const [uploadedIamge, setUploadedImage] = useState<File | null>();
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (myProfileInfo) {
@@ -118,12 +123,13 @@ export const EditProfile = () => {
     data['personalities'] = personalities;
 
     const formData = new FormData();
-    if (uploadedIamge) {
-      formData.append('file', uploadedIamge);
-      formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
-
-      fetchEditProfile(formData);
+    if (uploadedImage) {
+      formData.append('file', uploadedImage);
     }
+    formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+
+    fetchEditProfile(formData);
+    setModalOpen(true);
   };
 
   const getPersonalities = (selectedKeywords: string[]) => {
@@ -136,6 +142,11 @@ export const EditProfile = () => {
 
   const getUploadedImage = (inputUploadedImage: File) => {
     setUploadedImage(inputUploadedImage);
+  };
+
+  const handleCloseModalClick = () => {
+    setModalOpen(false);
+    navigate('/mypage');
   };
 
   if (myProfileInfo) {
@@ -191,6 +202,11 @@ export const EditProfile = () => {
         <Keyword title="취미" defaultKeywordList={hobbies} keywordList={HOBBY_LIST} getKeywordList={getHobbies} />
         <TextArea title="한줄 소개(선택)" {...register('description', { maxLength: 100, value: description })} />
         <Button title="수정 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
+        {modalOpen ? (
+          <ModalPortal>
+            <Modal title="회원정보 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} />
+          </ModalPortal>
+        ) : null}
       </S.EditProfileForm>
     );
   }
