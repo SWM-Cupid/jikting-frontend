@@ -7,6 +7,9 @@ import { useForm } from 'react-hook-form';
 import { validIdCheck, validPasswordCheck } from 'validation';
 import { useMutationLogin } from 'hooks/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import ModalPortal from 'components/Modal/ModalPortal';
+import { Modal } from 'components/Modal';
 
 export const NormalLogin = () => {
   const {
@@ -17,6 +20,7 @@ export const NormalLogin = () => {
 
   const { mutateAsync } = useMutationLogin();
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
 
   const handleLoginClick = async (data: { [key: string]: string }) => {
     const { username, password } = data;
@@ -24,8 +28,7 @@ export const NormalLogin = () => {
       await mutateAsync({ username, password });
       navigate('/main');
     } catch {
-      // TODO: 로그인 실패 Modal 창 띄우기
-      console.log('로그인 실패');
+      setOpenModal(true);
     }
   };
 
@@ -39,6 +42,10 @@ export const NormalLogin = () => {
 
   const handleSignUpClick = () => {
     navigate('/signup');
+  };
+
+  const handleModalCloseClick = () => {
+    setOpenModal(false);
   };
   return (
     <S.LoginWrapper>
@@ -70,6 +77,11 @@ export const NormalLogin = () => {
         <S.DivideLine />
         <Button title="회원가입" size="small" background="none" color="#666" onClick={handleSignUpClick}></Button>
       </S.SubButtonWrapper>
+      {openModal ? (
+        <ModalPortal>
+          <Modal title="아이디와 비밀번호를 확인해주세요" handleButtonClick={handleModalCloseClick} />
+        </ModalPortal>
+      ) : null}
     </S.LoginWrapper>
   );
 };
