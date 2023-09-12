@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { authenticated } from './axiosInstance';
+import { SubmitData } from 'pages/EditPassword';
 
 interface MyInfo {
   nickname: string;
@@ -22,4 +23,8 @@ export const fetchEditProfile = async (data: FormData) => {
 
 export const fetchEditNickName = async (data: { nickname: string }) => {
   return await authenticated.patch('/members', data);
+};
+
+export const fetchEditPassword = async (data: SubmitData) => {
+  return await authenticated.patch('/members/password', data);
 };

@@ -1,11 +1,11 @@
 import { styled } from 'styled-components';
 
-export const FindUserIdPasswordWrapper = styled.div`
+export const FlexColumn = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-export const Content = styled.div`
+export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
