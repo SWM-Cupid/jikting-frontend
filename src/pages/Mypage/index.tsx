@@ -13,6 +13,10 @@ export const Mypage = () => {
     navigate('/editprofile');
   };
 
+  const handleChangePasswordClick = () => {
+    navigate('/editpassword');
+  };
+
   const handleNickNameEditClick = () => {
     if (data) {
       navigate('/editnickname', { state: { nickname: data.nickname } });
@@ -51,7 +55,7 @@ export const Mypage = () => {
             </S.MenuContentWrapper>
           </S.MenuItem>
 
-          <S.MenuItem>
+          <S.MenuItem onClick={handleChangePasswordClick}>
             <S.MenuTitle>비밀번호 변경</S.MenuTitle>
             <S.MenuContentWrapper>
               <RightArrow />
