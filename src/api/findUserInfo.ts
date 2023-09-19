@@ -10,9 +10,26 @@ export const fetchFindIdSendCode = async (userInfo: UserInfo) => {
   }
 };
 
+export const fetchFindIdVerificationCode = async (phone: string, verificationCode: string) => {
+  try {
+    return (await unauthenticated.post('/members/username/search/verification', { phone, verificationCode })).data.data;
+  } catch {
+    return false;
+  }
+};
+
 export const fetchFindPasswordSendCode = async (userInfo: UserInfo) => {
   try {
     await unauthenticated.post('/members/password/reset/code', userInfo);
+    return true;
+  } catch {
+    return false;
+  }
+};
+
+export const fetchFindPasswordVerificationCode = async (phone: string, verificationCode: string) => {
+  try {
+    await unauthenticated.post('/members/password/reset/verification', { phone, verificationCode });
     return true;
   } catch {
     return false;
