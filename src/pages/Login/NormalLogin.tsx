@@ -33,7 +33,7 @@ export const NormalLogin = () => {
   };
 
   const handleFindIdClick = () => {
-    // TODO: 아이디 찾기 페이지로 이동
+    navigate('/finduseridpassword', { state: { findType: 'id' } });
   };
 
   const handleFindPasswordClick = () => {
