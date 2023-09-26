@@ -1,17 +1,25 @@
 import * as S from './style';
 import Carmera from 'assets/images/camera.svg';
 import { Plus } from 'assets/images/Plus';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface Props {
   size: 'medium' | 'small';
+  previewImage: string;
   getUploadedImage(inputUploadedImage: File): void;
 }
 
-export const UploadImage = ({ size, getUploadedImage }: Props) => {
+export const UploadImage = ({ size, previewImage, getUploadedImage }: Props) => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const previewRef = useRef<HTMLDivElement | null>(null);
   const [isUploadImage, setIsUploadImage] = useState(false);
+
+  useEffect(() => {
+    if (previewImage && previewRef.current !== null) {
+      previewRef.current.style.backgroundImage = `url(${previewImage})`;
+      setIsUploadImage(true);
+    }
+  }, [previewImage, previewRef]);
 
   const handleUploadImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
