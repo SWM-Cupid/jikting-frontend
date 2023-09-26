@@ -156,17 +156,19 @@ export const EditProfile = () => {
 
   const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
     const v = e.target.value;
+
     if (v.length === 8 && v[4] !== '-') {
       setValue('birth', `${v.slice(0, 4)}-${v.slice(4, 6)}-${v.slice(6)}`);
       return;
     }
+
     if (v.length === 8 && v[7] !== '-') {
       setValue('birth', `${v.slice(0, 7)}-${v.slice(7)}`);
       return;
     }
+
     if (v.length === 5 && v[4] !== '-') {
       setValue('birth', `${v.slice(0, 4)}-${v.slice(4)}`);
-      return;
     }
   };
 
