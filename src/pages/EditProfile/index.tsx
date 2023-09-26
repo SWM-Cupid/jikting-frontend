@@ -101,7 +101,7 @@ export const EditProfile = () => {
     handleSubmit,
     setValue,
     reset,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<EditProfileInfo>();
 
   const [personalities, setPersonalities] = useState<string[]>([]);
@@ -121,6 +121,8 @@ export const EditProfile = () => {
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
+    if (!isDirty) return;
+
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
     data['personalities'] = personalities;
