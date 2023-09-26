@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 
-export const FlexColumn = styled.div`
+export const EditPasswordWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
