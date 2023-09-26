@@ -100,6 +100,7 @@ export const EditProfile = () => {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<EditProfileInfo>();
 
@@ -113,10 +114,13 @@ export const EditProfile = () => {
     if (myProfileInfo) {
       setPersonalities(myProfileInfo.personalities);
       setHobbies(myProfileInfo.hobbies);
+      reset({
+        ...myProfileInfo,
+      });
     }
-  }, [myProfileInfo]);
+  }, [myProfileInfo, reset]);
 
-  const onSubmit: SubmitHandler<EditProfileInfo> = (data: EditProfileInfo) => {
+  const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
     data['personalities'] = personalities;
@@ -127,7 +131,7 @@ export const EditProfile = () => {
     }
     formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
-    fetchEditProfile(formData);
+    await fetchEditProfile(formData);
     setModalOpen(true);
   };
 
@@ -165,13 +169,11 @@ export const EditProfile = () => {
   };
 
   if (myProfileInfo) {
-    const { birth, height, address, mbti, smokeStatus, drinkStatus, college, description, images } = myProfileInfo;
-
     return (
       <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
         <Header previous title="프로필 수정" />
         <S.UploadImageWrapper>
-          <UploadImage size="medium" previewImage={images[0].url} getUploadedImage={getUploadedImage} />
+          <UploadImage size="medium" previewImage={myProfileInfo.images[0].url} getUploadedImage={getUploadedImage} />
         </S.UploadImageWrapper>
         <Input
           title="생년월일"
@@ -183,33 +185,20 @@ export const EditProfile = () => {
               validBirthCheck,
             },
             maxLength: 10,
-            value: birth,
           })}
           onChange={parsingBirthWithHyphen}
         />
-        <Input
-          title="키(cm)"
-          error={errors.height}
-          {...register('height', { required: '키 입력은 필수 입니다.', value: height })}
-        />
+        <Input title="키(cm)" error={errors.height} {...register('height', { required: '키 입력은 필수 입니다.' })} />
         <Input
           title="거주지"
           error={errors.address}
           placeholder="ex> 서울시 광진구"
-          {...register('address', { required: '거주지 입력은 필수 입니다.', value: address })}
+          {...register('address', { required: '거주지 입력은 필수 입니다.' })}
         />
-        <Select title="MBTI" optionList={MBTI_LIST} {...register('mbti', { required: true, value: mbti })} />
-        <Select
-          title="음주여부"
-          optionList={DRINKING_OPTION_LIST}
-          {...register('drinkStatus', { required: true, value: drinkStatus })}
-        />
-        <Select
-          title="흡연여부"
-          optionList={SMOCKING_OPTION_LIST}
-          {...register('smokeStatus', { required: true, value: smokeStatus })}
-        />
-        <Input title="출신대학교(선택)" {...register('college', { value: college })} />
+        <Select title="MBTI" optionList={MBTI_LIST} {...register('mbti', { required: true })} />
+        <Select title="음주여부" optionList={DRINKING_OPTION_LIST} {...register('drinkStatus', { required: true })} />
+        <Select title="흡연여부" optionList={SMOCKING_OPTION_LIST} {...register('smokeStatus', { required: true })} />
+        <Input title="출신대학교(선택)" {...register('college')} />
         <Keyword
           title="성격"
           defaultKeywordList={personalities}
@@ -217,7 +206,7 @@ export const EditProfile = () => {
           getKeywordList={getPersonalities}
         />
         <Keyword title="취미" defaultKeywordList={hobbies} keywordList={HOBBY_LIST} getKeywordList={getHobbies} />
-        <TextArea title="한줄 소개(선택)" {...register('description', { maxLength: 100, value: description })} />
+        <TextArea title="한줄 소개(선택)" {...register('description', { maxLength: 100 })} />
         <Button title="수정 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
         {modalOpen ? (
           <ModalPortal>
