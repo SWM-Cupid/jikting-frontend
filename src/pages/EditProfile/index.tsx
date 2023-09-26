@@ -99,6 +99,7 @@ export const EditProfile = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<EditProfileInfo>();
 
@@ -116,8 +117,6 @@ export const EditProfile = () => {
   }, [myProfileInfo]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = (data: EditProfileInfo) => {
-    const age = data.birth;
-    data.birth = `${age.slice(0, 4)}-${age.slice(4, 6)}-${age.slice(6)}`;
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
     data['personalities'] = personalities;
@@ -149,6 +148,22 @@ export const EditProfile = () => {
     navigate('/mypage');
   };
 
+  const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const v = e.target.value;
+    if (v.length === 8 && v[4] !== '-') {
+      setValue('birth', `${v.slice(0, 4)}-${v.slice(4, 6)}-${v.slice(6)}`);
+      return;
+    }
+    if (v.length === 8 && v[7] !== '-') {
+      setValue('birth', `${v.slice(0, 7)}-${v.slice(7)}`);
+      return;
+    }
+    if (v.length === 5 && v[4] !== '-') {
+      setValue('birth', `${v.slice(0, 4)}-${v.slice(4)}`);
+      return;
+    }
+  };
+
   if (myProfileInfo) {
     const { birth, height, address, mbti, smokeStatus, drinkStatus, college, description, images } = myProfileInfo;
 
@@ -161,14 +176,16 @@ export const EditProfile = () => {
         <Input
           title="생년월일"
           error={errors.birth}
-          placeholder="ex> 19990130"
+          placeholder="생년월일 8자리를 입력해주세요."
           {...register('birth', {
             required: '생년월일 입력은 필수 입니다.',
             validate: {
               validBirthCheck,
             },
+            maxLength: 10,
             value: birth,
           })}
+          onChange={parsingBirthWithHyphen}
         />
         <Input
           title="키(cm)"
