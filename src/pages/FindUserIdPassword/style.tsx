@@ -12,3 +12,18 @@ export const Form = styled.form`
   gap: 2.6rem;
   margin: 2rem auto;
 `;
+
+export const FindIdResultWrapper = styled(FlexColumn)`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Result = styled(FlexColumn)`
+  height: 20%;
+  font-size: 1.8rem;
+  text-align: center;
+`;

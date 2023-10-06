@@ -2,6 +2,8 @@ import { ChatList } from 'pages/Chat';
 import { EditNickName } from 'pages/EditNickName';
 import { EditPassword } from 'pages/EditPassword';
 import { EditProfile } from 'pages/EditProfile';
+import { FindUserIdPassword } from 'pages/FindUserIdPassword';
+import { FindIdResult } from 'pages/FindUserIdPassword/FindIdResult';
 import { Like } from 'pages/Like';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
@@ -32,6 +34,7 @@ const App = () => {
           <Route path="/" element={<SelectLogin />} />
           <Route path="/main" element={<Main />} />
           <Route path="/normallogin" element={<NormalLogin />} />
+          <Route path="/finduseridpassword" element={<FindUserIdPassword />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/editnickname" element={<EditNickName />} />
