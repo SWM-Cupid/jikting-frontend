@@ -27,7 +27,7 @@ export const AuthUser = ({
   moveNextStep,
 }: {
   findType: string;
-  moveNextStep: (nextStep: string) => void;
+  moveNextStep: (nextStep: string, result?: string) => void;
 }) => {
   const [isSendCode, setIsSendCode] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -56,10 +56,15 @@ export const AuthUser = ({
   };
 
   const checkVerificationCode = async (phone: UserInfo['phone'], verificationCode: UserInfo['verificationCode']) => {
-    if (findType === 'id' && (await fetchFindIdVerificationCode(phone, verificationCode))) {
-      moveNextStep('FindIdResult');
+    if (findType === 'id') {
+      const findIdResult = await fetchFindIdVerificationCode(phone, verificationCode);
+      if (typeof findIdResult === 'string') {
+        moveNextStep('FindIdResult', findIdResult);
+      }
       return;
-    } else if (findType === 'password' && (await fetchFindPasswordVerificationCode(phone, verificationCode))) {
+    }
+
+    if (findType === 'password' && (await fetchFindPasswordVerificationCode(phone, verificationCode))) {
       moveNextStep('FindPasswordResult');
       return;
     }

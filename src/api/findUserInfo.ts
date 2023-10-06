@@ -12,7 +12,8 @@ export const fetchFindIdSendCode = async (userInfo: UserInfo) => {
 
 export const fetchFindIdVerificationCode = async (phone: string, verificationCode: string) => {
   try {
-    return (await unauthenticated.post('/members/username/search/verification', { phone, verificationCode })).data.data;
+    return (await unauthenticated.post('/members/username/search/verification', { phone, verificationCode })).data
+      .username;
   } catch {
     return false;
   }
