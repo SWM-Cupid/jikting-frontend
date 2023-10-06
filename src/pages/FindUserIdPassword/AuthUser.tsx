@@ -31,6 +31,7 @@ export const AuthUser = ({
 }) => {
   const [isSendCode, setIsSendCode] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const {
     register,
@@ -47,12 +48,25 @@ export const AuthUser = ({
     checkVerificationCode(data.phone, data.verificationCode);
   };
 
+  const showErrorMessage = (message: string) => {
+    setModalOpen(true);
+    setModalMessage(message);
+  };
+
   const sendCode = async (data: UserInfo) => {
     if (findType === 'id') {
-      setIsSendCode(await fetchFindIdSendCode(data));
-    } else if (findType === 'password') {
+      const isValidUserInfo = await fetchFindIdSendCode(data);
+      if (isValidUserInfo) {
+        setIsSendCode(isValidUserInfo);
+        return;
+      }
+    }
+
+    if (findType === 'password') {
       setIsSendCode(await fetchFindPasswordSendCode(data));
     }
+
+    showErrorMessage('사용자 정보를 찾을 수 없습니다.');
   };
 
   const checkVerificationCode = async (phone: UserInfo['phone'], verificationCode: UserInfo['verificationCode']) => {
@@ -60,16 +74,15 @@ export const AuthUser = ({
       const findIdResult = await fetchFindIdVerificationCode(phone, verificationCode);
       if (typeof findIdResult === 'string') {
         moveNextStep('FindIdResult', findIdResult);
+        return;
       }
-      return;
     }
 
     if (findType === 'password' && (await fetchFindPasswordVerificationCode(phone, verificationCode))) {
       moveNextStep('FindPasswordResult');
-      return;
     }
 
-    setModalOpen(true);
+    showErrorMessage('인증번호가 일치하지 않습니다.');
   };
 
   const handleCloseModalClick = () => {
@@ -102,7 +115,7 @@ export const AuthUser = ({
       </S.Form>
       {modalOpen ? (
         <ModalPortal>
-          <Modal title="인증번호가 일치하지 않습니다." handleButtonClick={handleCloseModalClick} />
+          <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
         </ModalPortal>
       ) : null}
     </S.FlexColumn>
