@@ -36,3 +36,10 @@ export const fetchFindPasswordVerificationCode = async (phone: string, verificat
     return false;
   }
 };
+
+export const fetchResetPassword = async (username: string, password: string) => {
+  return await unauthenticated.patch('/members/password/reset', {
+    username,
+    password,
+  });
+};
