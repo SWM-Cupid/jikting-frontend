@@ -24,9 +24,11 @@ export interface UserInfo {
 
 export const AuthUser = ({
   findType,
+  setUsername,
   moveNextStep,
 }: {
   findType: string;
+  setUsername: (username: string) => void;
   moveNextStep: (nextStep: string, result?: string) => void;
 }) => {
   const [isSendCode, setIsSendCode] = useState(false);
@@ -45,6 +47,7 @@ export const AuthUser = ({
       return;
     }
 
+    setUsername(data.username);
     checkVerificationCode(data.phone, data.verificationCode);
   };
 
@@ -57,13 +60,14 @@ export const AuthUser = ({
     if (findType === 'id') {
       const isValidUserInfo = await fetchFindIdSendCode(data);
       if (isValidUserInfo) {
-        setIsSendCode(isValidUserInfo);
+        setIsSendCode(true);
         return;
       }
     }
 
-    if (findType === 'password') {
-      setIsSendCode(await fetchFindPasswordSendCode(data));
+    if (findType === 'password' && (await fetchFindPasswordSendCode(data))) {
+      setIsSendCode(true);
+      return;
     }
 
     showErrorMessage('사용자 정보를 찾을 수 없습니다.');
@@ -80,6 +84,7 @@ export const AuthUser = ({
 
     if (findType === 'password' && (await fetchFindPasswordVerificationCode(phone, verificationCode))) {
       moveNextStep('FindPasswordResult');
+      return;
     }
 
     showErrorMessage('인증번호가 일치하지 않습니다.');

@@ -37,7 +37,7 @@ export const NormalLogin = () => {
   };
 
   const handleFindPasswordClick = () => {
-    // TODO: 비밀번호 찾기 페이지로 이동
+    navigate('/finduseridpassword', { state: { findType: 'password' } });
   };
 
   const handleSignUpClick = () => {

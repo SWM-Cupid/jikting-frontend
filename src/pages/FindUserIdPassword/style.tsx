@@ -27,3 +27,12 @@ export const Result = styled(FlexColumn)`
   font-size: 1.8rem;
   text-align: center;
 `;
+
+export const FindPasswordWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding-top: 6rem;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+`;
