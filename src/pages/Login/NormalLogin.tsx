@@ -23,6 +23,7 @@ export const NormalLogin = () => {
   const [openModal, setOpenModal] = useState(false);
 
   const handleLoginClick = async (data: { [key: string]: string }) => {
+    (document.activeElement as HTMLElement).blur();
     const { username, password } = data;
     try {
       await mutateAsync({ username, password });
