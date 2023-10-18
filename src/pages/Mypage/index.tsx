@@ -4,6 +4,7 @@ import { NavBar } from 'components/NavBar';
 import RightArrow from 'assets/images/rightarrow.svg';
 import { useQueryMyInfo } from 'hooks/useMypageQuery';
 import { useNavigate } from 'react-router-dom';
+import { fetchLogout } from 'api/mypage';
 
 export const Mypage = () => {
   const data = useQueryMyInfo();
@@ -20,6 +21,12 @@ export const Mypage = () => {
   const handleNickNameEditClick = () => {
     if (data) {
       navigate('/editnickname', { state: { nickname: data.nickname } });
+    }
+  };
+
+  const handleLogoutClick = async () => {
+    if (await fetchLogout()) {
+      navigate('/');
     }
   };
 
@@ -62,7 +69,7 @@ export const Mypage = () => {
             </S.MenuContentWrapper>
           </S.MenuItem>
 
-          <S.MenuItem>
+          <S.MenuItem onClick={handleLogoutClick}>
             <S.MenuTitle>로그아웃</S.MenuTitle>
             <S.MenuContentWrapper>
               <RightArrow />

@@ -44,7 +44,6 @@ export const fetchEditNickName = async (data: { nickname: string }) => {
   return await authenticated.patch('/members', data);
 };
 
-
 export const fetchMyProfileInfo = async () => {
   const response: AxiosResponse<MyProfileInfo> = await authenticated.get('/members/profile');
   return response;
@@ -52,4 +51,11 @@ export const fetchMyProfileInfo = async () => {
 
 export const fetchEditPassword = async (data: SubmitData) => {
   return await authenticated.patch('/members/password', data);
+};
+
+export const fetchLogout = async () => {
+  return await authenticated
+    .post('/members/logout')
+    .then(() => true)
+    .catch(() => false);
 };
