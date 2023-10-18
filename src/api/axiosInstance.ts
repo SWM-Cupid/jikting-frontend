@@ -46,9 +46,15 @@ authenticated.interceptors.response.use(
     }
 
     if (error.response.data.code === 'C009') {
-      alert('토큰이 모두 만료되었습니다..!');
+      alert('토큰이 모두 만료되었습니다');
       window.location.href = '/';
     }
+
+    if (error.response.data.code === 'U001') {
+      alert('로그인을 다시 하세요.');
+      window.location.href = '/';
+    }
+
     return Promise.reject(error);
   },
 );
