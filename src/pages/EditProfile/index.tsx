@@ -136,7 +136,7 @@ export const EditProfile = () => {
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
-    if (!isDirty) return;
+    if (!isDirty && myProfileInfo?.hobbies === hobbies && myProfileInfo?.personalities === personalities) return;
 
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
@@ -187,7 +187,7 @@ export const EditProfile = () => {
     }
   };
 
-  if (myProfileInfo) {
+  if (myProfileInfo && hobbies.length && personalities.length) {
     return (
       <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
         <Header previous title="프로필 수정" />
