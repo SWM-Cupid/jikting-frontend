@@ -17,7 +17,7 @@ interface Props {
 
 export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList }: Props) => {
   const [keywordModalOpen, setKeywordModalOpen] = useState(false);
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(defaultKeywordList);
 
   const handleAddKeywordClick = () => {
     setKeywordModalOpen(true);
