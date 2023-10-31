@@ -7,6 +7,7 @@ import { Header } from 'components/Header';
 import { Button } from 'components/Button';
 import { theme } from 'styles/theme';
 import ModalPortal from 'components/Modal/ModalPortal';
+import { Mask } from 'components/Modal/style';
 
 interface Props {
   title: '성격' | '취미';
@@ -52,7 +53,7 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
 
       {keywordModalOpen && (
         <ModalPortal>
-          <ModalBottomSheet>
+          <ModalBottomSheet handleMaskClick={() => setKeywordModalOpen(false)}>
             <Header title={title} />
             <S.KeywordList>
               {keywordList.map((item) => (
