@@ -3,7 +3,6 @@ import { EditNickName } from 'pages/EditNickName';
 import { EditPassword } from 'pages/EditPassword';
 import { EditProfile } from 'pages/EditProfile';
 import { FindUserIdPassword } from 'pages/FindUserIdPassword';
-import { FindIdResult } from 'pages/FindUserIdPassword/FindIdResult';
 import { Like } from 'pages/Like';
 import { SelectLogin } from 'pages/Login';
 import { NormalLogin } from 'pages/Login/NormalLogin';
