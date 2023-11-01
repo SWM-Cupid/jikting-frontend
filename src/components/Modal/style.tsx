@@ -7,7 +7,7 @@ export const Mask = styled.div`
   width: 100%;
   height: 100%;
   background: rgb(0, 0, 0, 0.5);
-  backdrop-filter: blur(0.5);
+  backdrop-filter: blur(5px);
 `;
 
 export const Wrapper = styled.div`

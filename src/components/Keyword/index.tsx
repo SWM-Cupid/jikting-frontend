@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { KeywordItem } from './KeywordItem';
 import * as S from './style';
 import { Plus } from 'assets/images/Plus';
@@ -17,7 +17,11 @@ interface Props {
 
 export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList }: Props) => {
   const [keywordModalOpen, setKeywordModalOpen] = useState(false);
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(defaultKeywordList);
+
+  useEffect(() => {
+    setSelectedKeywords(defaultKeywordList);
+  }, [keywordModalOpen, defaultKeywordList]);
 
   const handleAddKeywordClick = () => {
     setKeywordModalOpen(true);
@@ -32,6 +36,8 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
     if (selectedKeywords.includes(itemName)) {
       setSelectedKeywords(selectedKeywords.filter((item) => item !== itemName));
     } else {
+      if (selectedKeywords.length >= 3) return;
+
       setSelectedKeywords([...selectedKeywords, itemName]);
     }
   };
@@ -40,7 +46,9 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
       <S.KeyWordWrapper>
         <S.Title>{title}</S.Title>
         <S.AddBox onClick={handleAddKeywordClick}>
-          <S.PlaceHolder>{title === '취미' ? '취미를' : '성격을'} 추가해주세요.</S.PlaceHolder>
+          <S.PlaceHolder>
+            {title === '취미' ? '취미를 추가해주세요. (선택 최대 3개)' : '성격을 추가해주세요. (필수 3개)'}
+          </S.PlaceHolder>
           <Plus width="2.4rem" height="2.4rem" fill="#999999" />
         </S.AddBox>
         <S.KeywordList>
@@ -52,7 +60,7 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
 
       {keywordModalOpen && (
         <ModalPortal>
-          <ModalBottomSheet>
+          <ModalBottomSheet handleMaskClick={() => setKeywordModalOpen(false)}>
             <Header title={title} />
             <S.KeywordList>
               {keywordList.map((item) => (

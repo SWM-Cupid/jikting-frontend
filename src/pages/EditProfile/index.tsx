@@ -59,24 +59,39 @@ const PERSONALITY_LIST = [
   '재미있는',
 ];
 const HOBBY_LIST = [
-  '독서',
-  '와인',
-  '음악감상',
+  '취미 없음',
   '골프',
-  '공연/전시',
-  '영화',
-  '여행',
-  '자기계발',
-  '드라이브',
-  '헬스',
-  '사진 찍기',
-  '악기 연주',
-  '카공',
-  '맛집 탐방',
+  '낚시',
   '등산',
   '클라이밍',
-  '게임',
+  '테니스',
+  '배드민턴',
+  '승마',
+  '수영',
+  '자전거',
   '러닝',
+  '헬스',
+  '맛집탐방',
+  '카페투어',
+  '독서',
+  '애니',
+  '작문/시쓰기',
+  '캘리그라피',
+  '뜨개질',
+  '게임',
+  '체스',
+  '바둑',
+  '장기',
+  '뮤지컬 관람',
+  '클래식',
+  '연주회 관람',
+  '공연 관람',
+  '아이돌 덕질',
+  '원예',
+  '악기',
+  '댄스',
+  '보컬',
+  '여행',
 ];
 
 interface EditProfileInfo {
@@ -108,6 +123,7 @@ export const EditProfile = () => {
   const [hobbies, setHobbies] = useState<string[]>([]);
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -121,7 +137,13 @@ export const EditProfile = () => {
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
-    if (!isDirty) return;
+    if (!isDirty && myProfileInfo?.personalities === personalities && myProfileInfo?.hobbies === hobbies) return;
+
+    if (personalities.length !== 3) {
+      setModalMessage('성격을 3개 추가해주세요.');
+      setModalOpen(true);
+      return;
+    }
 
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
@@ -134,6 +156,7 @@ export const EditProfile = () => {
     formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
     await fetchEditProfile(formData);
+    setModalMessage('회원정보 변경이 완료되었습니다.');
     setModalOpen(true);
   };
 
@@ -151,7 +174,8 @@ export const EditProfile = () => {
 
   const handleCloseModalClick = () => {
     setModalOpen(false);
-    navigate('/mypage');
+
+    if (modalMessage === '회원정보 변경이 완료되었습니다.') navigate('/mypage');
   };
 
   const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -214,7 +238,7 @@ export const EditProfile = () => {
         <Button title="수정 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
         {modalOpen ? (
           <ModalPortal>
-            <Modal title="회원정보 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} />
+            <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
           </ModalPortal>
         ) : null}
       </S.EditProfileForm>
