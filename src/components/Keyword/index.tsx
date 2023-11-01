@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { KeywordItem } from './KeywordItem';
 import * as S from './style';
 import { Plus } from 'assets/images/Plus';
@@ -7,7 +7,6 @@ import { Header } from 'components/Header';
 import { Button } from 'components/Button';
 import { theme } from 'styles/theme';
 import ModalPortal from 'components/Modal/ModalPortal';
-import { Mask } from 'components/Modal/style';
 
 interface Props {
   title: '성격' | '취미';
@@ -19,6 +18,10 @@ interface Props {
 export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList }: Props) => {
   const [keywordModalOpen, setKeywordModalOpen] = useState(false);
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>(defaultKeywordList);
+
+  useEffect(() => {
+    setSelectedKeywords(defaultKeywordList);
+  }, [keywordModalOpen, defaultKeywordList]);
 
   const handleAddKeywordClick = () => {
     setKeywordModalOpen(true);
@@ -33,6 +36,8 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
     if (selectedKeywords.includes(itemName)) {
       setSelectedKeywords(selectedKeywords.filter((item) => item !== itemName));
     } else {
+      if (selectedKeywords.length >= 3) return;
+
       setSelectedKeywords([...selectedKeywords, itemName]);
     }
   };
@@ -41,7 +46,9 @@ export const Keyword = ({ title, keywordList, defaultKeywordList, getKeywordList
       <S.KeyWordWrapper>
         <S.Title>{title}</S.Title>
         <S.AddBox onClick={handleAddKeywordClick}>
-          <S.PlaceHolder>{title === '취미' ? '취미를' : '성격을'} 추가해주세요.</S.PlaceHolder>
+          <S.PlaceHolder>
+            {title === '취미' ? '취미를 추가해주세요. (선택 최대 3개)' : '성격을 추가해주세요. (필수 3개)'}
+          </S.PlaceHolder>
           <Plus width="2.4rem" height="2.4rem" fill="#999999" />
         </S.AddBox>
         <S.KeywordList>

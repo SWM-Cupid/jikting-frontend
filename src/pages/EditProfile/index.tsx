@@ -123,6 +123,7 @@ export const EditProfile = () => {
   const [hobbies, setHobbies] = useState<string[]>([]);
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -136,7 +137,13 @@ export const EditProfile = () => {
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
-    if (!isDirty && myProfileInfo?.hobbies === hobbies && myProfileInfo?.personalities === personalities) return;
+    if (!isDirty && myProfileInfo?.personalities === personalities && myProfileInfo?.hobbies === hobbies) return;
+
+    if (personalities.length !== 3) {
+      setModalMessage('성격을 3개 추가해주세요.');
+      setModalOpen(true);
+      return;
+    }
 
     data.height = Number(data.height);
     data['hobbies'] = hobbies;
@@ -149,6 +156,7 @@ export const EditProfile = () => {
     formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
     await fetchEditProfile(formData);
+    setModalMessage('회원정보 변경이 완료되었습니다.');
     setModalOpen(true);
   };
 
@@ -166,7 +174,8 @@ export const EditProfile = () => {
 
   const handleCloseModalClick = () => {
     setModalOpen(false);
-    navigate('/mypage');
+
+    if (modalMessage === '회원정보 변경이 완료되었습니다.') navigate('/mypage');
   };
 
   const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -187,7 +196,7 @@ export const EditProfile = () => {
     }
   };
 
-  if (myProfileInfo && hobbies.length && personalities.length) {
+  if (myProfileInfo) {
     return (
       <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
         <Header previous title="프로필 수정" />
@@ -229,7 +238,7 @@ export const EditProfile = () => {
         <Button title="수정 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
         {modalOpen ? (
           <ModalPortal>
-            <Modal title="회원정보 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} />
+            <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
           </ModalPortal>
         ) : null}
       </S.EditProfileForm>
