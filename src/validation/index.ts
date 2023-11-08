@@ -27,3 +27,9 @@ export const validBirthCheck = (input: string) => {
   const validBirthPattern = /^(19|20)\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
   return validBirthPattern.test(input) ? true : '올바른 생년월일을 입력해주세요.';
 };
+
+export const validEmailCheck = (input: string) => {
+  const validEmailPattern =
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return validEmailPattern.test(input) ? true : '올바른 이메일을 입력해주세요';
+};
