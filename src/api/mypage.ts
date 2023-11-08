@@ -59,3 +59,14 @@ export const fetchLogout = async () => {
     .then(() => true)
     .catch(() => false);
 };
+
+export const fetchSendEmailCode = async (email: string) => {
+  await authenticated.post('/members/company/code', email);
+};
+
+export const fetchVerifyEmailCode = async (email: string, verificationCode: number) => {
+  return await authenticated
+    .post('/members/company/verification', { email, verificationCode })
+    .then(() => true)
+    .catch(() => false);
+};

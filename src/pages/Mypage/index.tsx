@@ -24,6 +24,10 @@ export const Mypage = () => {
     }
   };
 
+  const handleVerifyCompanyClick = () => {
+    navigate('/verifycompany');
+  };
+
   const handleLogoutClick = async () => {
     if (await fetchLogout()) {
       navigate('/');
@@ -47,7 +51,7 @@ export const Mypage = () => {
             </S.MenuContentWrapper>
           </S.MenuItem>
 
-          <S.MenuItem>
+          <S.MenuItem onClick={handleVerifyCompanyClick}>
             <S.MenuTitle>회사</S.MenuTitle>
             <S.MenuContentWrapper>
               <S.MenuContent>{company}</S.MenuContent>

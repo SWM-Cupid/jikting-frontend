@@ -3,6 +3,7 @@ const colors = {
   mainBlack: '#000000',
   mainWhite: '#FFFFFF',
   mainPink: '#FF5680',
+  buttonGrey: '#CCCCCC',
   backgroundGrey: '#f2f2f2',
 };
 

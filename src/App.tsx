@@ -10,6 +10,7 @@ import { Main } from 'pages/Main';
 import { Mypage } from 'pages/Mypage';
 import { SignUp } from 'pages/SignUp';
 import { TeamList } from 'pages/Team';
+import { VerifyCompany } from 'pages/VerifyCompany';
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { styled } from 'styled-components';
@@ -38,6 +39,7 @@ const App = () => {
           <Route path="/editprofile" element={<EditProfile />} />
           <Route path="/editnickname" element={<EditNickName />} />
           <Route path="/editpassword" element={<EditPassword />} />
+          <Route path="/verifycompany" element={<VerifyCompany />} />
           <Route path="/team" element={<TeamList />} />
           <Route path="/chat" element={<ChatList />} />
           <Route path="/mypage" element={<Mypage />} />
