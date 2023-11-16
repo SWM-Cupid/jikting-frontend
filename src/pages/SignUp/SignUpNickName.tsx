@@ -40,7 +40,7 @@ export const SignUpNickName = ({ updateUserInfo, handleNextClick }: Props) => {
         })}
       />
 
-      <S.GenderWrapper>
+      <S.FlexColumn>
         <span>성별</span>
         <S.ButtonWrapper>
           {genderList.map((gender) => (
@@ -55,7 +55,7 @@ export const SignUpNickName = ({ updateUserInfo, handleNextClick }: Props) => {
             ></Button>
           ))}
         </S.ButtonWrapper>
-      </S.GenderWrapper>
+      </S.FlexColumn>
 
       <Button type="submit" title="다음" background="#FF5680"></Button>
     </S.Form>

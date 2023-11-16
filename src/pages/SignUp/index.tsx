@@ -5,6 +5,7 @@ import { SignUpIdPassword } from './SignUpIdPassword';
 import { SignUpNickName } from './SignUpNickName';
 import { SignUpAuthPhoneNumber } from './SignUpAuthPhoneNumber';
 import { useNavigate } from 'react-router-dom';
+import { TermsofService } from './TermsofService';
 
 export interface UserInfo {
   userId: string;
@@ -49,13 +50,14 @@ export const SignUp = () => {
     setStep((step) => step - 1);
   };
   return (
-    <S.SignUpWrapper>
+    <S.FlexColumn>
       <Header previous previousFunction={handlePreviousClick} title="회원가입" />
       <S.Content>
+        {step === 0 && <TermsofService handleNextClick={handleNextClick} />}
         {step === 1 && <SignUpIdPassword updateUserInfo={updateUserInfo} handleNextClick={handleNextClick} />}
         {step === 2 && <SignUpNickName updateUserInfo={updateUserInfo} handleNextClick={handleNextClick} />}
         {step === 3 && <SignUpAuthPhoneNumber userInfo={userInfo} updateUserInfo={updateUserInfo} />}
       </S.Content>
-    </S.SignUpWrapper>
+    </S.FlexColumn>
   );
 };
