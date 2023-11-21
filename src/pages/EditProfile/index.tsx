@@ -175,7 +175,7 @@ export const EditProfile = () => {
   const handleCloseModalClick = () => {
     setModalOpen(false);
 
-    if (modalMessage === '회원정보 변경이 완료되었습니다.') navigate('/mypage');
+    if (modalMessage === '회원정보 등록이 완료되었습니다.') navigate('/mypage');
   };
 
   const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,7 +199,7 @@ export const EditProfile = () => {
   if (myProfileInfo) {
     return (
       <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
-        <Header previous title="프로필 수정" />
+        <Header previous title="프로필" />
         <S.UploadImageWrapper>
           <UploadImage size="medium" previewImage={myProfileInfo.images[0].url} getUploadedImage={getUploadedImage} />
         </S.UploadImageWrapper>
