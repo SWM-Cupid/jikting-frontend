@@ -1,7 +1,5 @@
 import { Header } from 'components/Header';
 import * as S from './style';
-import { Button } from 'components/Button';
-import { theme } from 'styles/theme';
 import Company from 'assets/images/company.svg';
 import Drink from 'assets/images/drink.svg';
 import Smoke from 'assets/images/smoke.svg';
@@ -11,6 +9,7 @@ interface ITeamDetail {
   description: string;
   keywords: string[];
   name: string;
+  invitationUrl: string;
   members: {
     nickname: string;
     image: string;
@@ -25,7 +24,7 @@ interface ITeamDetail {
 }
 
 export const TeamDetail = (props: ITeamDetail) => {
-  const { name, description, keywords, members } = props;
+  const { name, description, keywords, members, invitationUrl } = props;
   return (
     <S.TeamWrapper>
       <Header title={name} previous />
@@ -79,7 +78,10 @@ export const TeamDetail = (props: ITeamDetail) => {
         <S.TeamDescription>{description}</S.TeamDescription>
       </S.SectionWrapper>
 
-      <Button title="팀원 초대하기" background={theme.colors.mainPink}></Button>
+      <S.SectionWrapper>
+        <S.Title>팀 초대 링크</S.Title>
+        <S.TeamDescription>{invitationUrl}</S.TeamDescription>
+      </S.SectionWrapper>
 
       <NavBar defaultActive="team" />
     </S.TeamWrapper>

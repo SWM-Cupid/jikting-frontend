@@ -21,6 +21,8 @@ export const TeamWrapper = styled.div`
 `;
 
 export const ButtonWrapper = styled.div`
+  display: flex;
+  gap: 1rem;
   position: fixed;
   bottom: 10%;
 `;
