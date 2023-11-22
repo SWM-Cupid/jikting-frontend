@@ -10,6 +10,7 @@ import { Main } from 'pages/Main';
 import { Mypage } from 'pages/Mypage';
 import { SignUp } from 'pages/SignUp';
 import { TeamList } from 'pages/Team';
+import { InviteTeamLink } from 'pages/Team/InviteTeamLink';
 import { VerifyCompany } from 'pages/VerifyCompany';
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -41,6 +42,7 @@ const App = () => {
           <Route path="/editpassword" element={<EditPassword />} />
           <Route path="/verifycompany" element={<VerifyCompany />} />
           <Route path="/team" element={<TeamList />} />
+          <Route path="/invite" element={<InviteTeamLink />} />
           <Route path="/chat" element={<ChatList />} />
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/like" element={<Like />} />
