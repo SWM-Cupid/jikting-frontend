@@ -11,3 +11,7 @@ export const fetchCreateTeam = async (data: ICreateTeam) => {
 
   return response;
 };
+
+export const fetchInviteTeam = async (id: string) => {
+  return await authenticated.post(`/teams/${id}/attend`);
+};
