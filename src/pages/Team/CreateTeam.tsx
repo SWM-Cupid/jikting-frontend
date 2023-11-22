@@ -18,6 +18,28 @@ export interface ICreateTeam {
 }
 
 export const CreateTeam = ({ handleRegisterTeamCompleteClick }: { handleRegisterTeamCompleteClick(): void }) => {
+  const PERSONALITY_LIST = [
+    '열정적인',
+    '상냥한',
+    '감성적인',
+    '애교많은',
+    '긍정적인',
+    '차분한',
+    '듬직한',
+    '4차원적인',
+    '털털한',
+    '활발한',
+    '웃음많은',
+    '솔직한',
+    '자상한',
+    '화끈한',
+    '섬세한',
+    '사교적인',
+    '센스있는',
+    '깔끔한',
+    '부지런한',
+    '재미있는',
+  ];
   const [teamPersonalities, setTeamPersonalities] = useState<string[]>([]);
   const { register, handleSubmit } = useForm<ICreateTeam>();
   const { mutateAsync } = useMutateCreateTeam();
@@ -47,7 +69,7 @@ export const CreateTeam = ({ handleRegisterTeamCompleteClick }: { handleRegister
       />
       <Keyword
         title="성격"
-        keywordList={['키워드', '리스트']}
+        keywordList={PERSONALITY_LIST}
         getKeywordList={getPersonalities}
         defaultKeywordList={teamPersonalities}
       />
