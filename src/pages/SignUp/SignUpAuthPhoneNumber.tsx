@@ -37,9 +37,15 @@ export const SignUpAuthPhoneNumber = ({ userInfo, updateUserInfo }: Props) => {
       await fetchVerificationCode(data.userPhoneNumber, data.verificationCode);
       delete data.verificationCode;
       updateUserInfo(data);
-      fetchSignup({ ...userInfo, ...data }).then(() => {
-        alert('회원가입 완료되었습니다..!');
-        navigate('/normallogin');
+      fetchSignup({ ...userInfo, ...data }).then((response) => {
+        const accessToken = response.headers['authorization'];
+        const refreshToken = response.headers['authorization-refresh'];
+        const userId = response.data['memberProfileId'];
+
+        localStorage.setItem('actk', `Bearer ${accessToken}`);
+        localStorage.setItem('uid', userId);
+        sessionStorage.setItem('rftk', refreshToken);
+        navigate('/editprofile');
       });
     } catch (error) {
       if (isAxiosError(error)) {
