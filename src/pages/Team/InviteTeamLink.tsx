@@ -2,7 +2,7 @@ import { fetchInviteTeam } from 'api/team';
 import { useSearchParams } from 'react-router-dom';
 
 export const InviteTeamLink = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const teamId = searchParams.get('team');
   let fetched = false;
 
