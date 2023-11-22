@@ -2,6 +2,7 @@ import { ComponentProps, forwardRef } from 'react';
 import { StyledInput, FlexWrapper, StyledChatInput } from './style';
 import { FieldError, FieldErrorsImpl, FieldValues, Merge } from 'react-hook-form';
 import { Error } from 'components/Error';
+import { StyledError } from 'components/Error/style';
 
 export const Input = forwardRef(
   (
@@ -15,7 +16,7 @@ export const Input = forwardRef(
     <FlexWrapper>
       <label>{title}</label>
       <StyledInput error={error} {...props} ref={ref}></StyledInput>
-      {error && <Error>{error.message?.toString()}</Error>}
+      {error ? <Error>{error.message?.toString()}</Error> : <StyledError />}
     </FlexWrapper>
   ),
 );

@@ -97,7 +97,7 @@ const HOBBY_LIST = [
 interface EditProfileInfo {
   image: File;
   birth: string;
-  height: number;
+  height: number | string;
   mbti: string;
   address: string;
   gender: string;
@@ -132,12 +132,19 @@ export const EditProfile = () => {
       setHobbies(myProfileInfo.hobbies);
       reset({
         ...myProfileInfo,
+        height: myProfileInfo.height ? myProfileInfo.height : '',
       });
     }
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
-    if (!isDirty && myProfileInfo?.personalities === personalities && myProfileInfo?.hobbies === hobbies) return;
+    if (
+      !isDirty &&
+      !uploadedImage &&
+      myProfileInfo?.personalities === personalities &&
+      myProfileInfo?.hobbies === hobbies
+    )
+      return;
 
     if (personalities.length !== 3) {
       setModalMessage('성격을 3개 추가해주세요.');
@@ -175,7 +182,7 @@ export const EditProfile = () => {
   const handleCloseModalClick = () => {
     setModalOpen(false);
 
-    if (modalMessage === '회원정보 변경이 완료되었습니다.') navigate('/mypage');
+    if (modalMessage === '회원정보 등록이 완료되었습니다.') navigate('/mypage');
   };
 
   const parsingBirthWithHyphen = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -199,7 +206,7 @@ export const EditProfile = () => {
   if (myProfileInfo) {
     return (
       <S.EditProfileForm onSubmit={handleSubmit(onSubmit)}>
-        <Header previous title="프로필 수정" />
+        <Header previous title="프로필" />
         <S.UploadImageWrapper>
           <UploadImage size="medium" previewImage={myProfileInfo.images[0].url} getUploadedImage={getUploadedImage} />
         </S.UploadImageWrapper>
@@ -216,7 +223,12 @@ export const EditProfile = () => {
           })}
           onChange={parsingBirthWithHyphen}
         />
-        <Input title="키(cm)" error={errors.height} {...register('height', { required: '키 입력은 필수 입니다.' })} />
+        <Input
+          title="키(cm)"
+          placeholder="키를 입력해주세요"
+          error={errors.height}
+          {...register('height', { required: '키 입력은 필수 입니다.' })}
+        />
         <Input
           title="거주지"
           error={errors.address}
