@@ -97,7 +97,7 @@ const HOBBY_LIST = [
 interface EditProfileInfo {
   image: File;
   birth: string;
-  height: number;
+  height: number | string;
   mbti: string;
   address: string;
   gender: string;
@@ -132,6 +132,7 @@ export const EditProfile = () => {
       setHobbies(myProfileInfo.hobbies);
       reset({
         ...myProfileInfo,
+        height: myProfileInfo.height ? myProfileInfo.height : '',
       });
     }
   }, [myProfileInfo, reset]);
@@ -216,7 +217,12 @@ export const EditProfile = () => {
           })}
           onChange={parsingBirthWithHyphen}
         />
-        <Input title="키(cm)" error={errors.height} {...register('height', { required: '키 입력은 필수 입니다.' })} />
+        <Input
+          title="키(cm)"
+          placeholder="키를 입력해주세요"
+          error={errors.height}
+          {...register('height', { required: '키 입력은 필수 입니다.' })}
+        />
         <Input
           title="거주지"
           error={errors.address}
