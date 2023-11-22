@@ -14,7 +14,7 @@ interface Images {
 
 interface MyProfileInfo {
   birth: string;
-  height: number;
+  height: number | string;
   gender: string;
   address: string;
   mbti: string;
