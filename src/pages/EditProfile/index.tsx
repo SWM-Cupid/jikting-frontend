@@ -138,7 +138,13 @@ export const EditProfile = () => {
   }, [myProfileInfo, reset]);
 
   const onSubmit: SubmitHandler<EditProfileInfo> = async (data: EditProfileInfo) => {
-    if (!isDirty && myProfileInfo?.personalities === personalities && myProfileInfo?.hobbies === hobbies) return;
+    if (
+      !isDirty &&
+      !uploadedImage &&
+      myProfileInfo?.personalities === personalities &&
+      myProfileInfo?.hobbies === hobbies
+    )
+      return;
 
     if (personalities.length !== 3) {
       setModalMessage('성격을 3개 추가해주세요.');
