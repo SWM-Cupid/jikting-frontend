@@ -2,14 +2,8 @@ import { fetchRecommendTeam } from 'api/main';
 import { useQuery } from 'react-query';
 
 export const useRecommendTeamQuery = () => {
-  const { data } = useQuery(['recommendTeam'], fetchRecommendTeam, {
-    onSuccess: ({ data }) => {
-      console.log(data);
-    },
-    onError: (error) => {
-      console.log(error);
-    },
-  });
+  const { data, isError } = useQuery(['recommendTeam'], fetchRecommendTeam, { retry: 0 });
 
-  return data?.data;
+  if (isError) return [];
+  else return data?.data;
 };
