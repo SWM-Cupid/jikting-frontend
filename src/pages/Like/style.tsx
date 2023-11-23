@@ -16,8 +16,8 @@ export const LikeWrapper = styled(FlexColumn)`
 `;
 
 export const TopNavWrapper = styled.div`
-  position: relative;
-  width: ${innerWidth * 0.095}rem;
+  width: 100%;
+  display: flex;
   height: 3.8rem;
   border-radius: 2.4rem;
   margin-top: 2rem;
@@ -25,7 +25,7 @@ export const TopNavWrapper = styled.div`
 `;
 
 export const TopNavButton = styled.button<{ selected?: boolean }>`
-  width: ${(innerWidth * 0.095) / 2}rem;
+  width: 100%;
   height: 3.8rem;
   text-align: center;
   font-size: 1.4rem;
@@ -44,13 +44,14 @@ export const TopNavButton = styled.button<{ selected?: boolean }>`
 
 export const Content = styled(FlexColumn)`
   gap: 1rem;
+  align-items: center;
 `;
 
 export const Team = styled(FlexColumn)`
   gap: 0.6rem;
   border-radius: 2rem;
   background: #fafafa;
-  width: ${innerWidth * 0.095}rem;
+  width: 95%;
   padding: 1.6rem 1.2rem 1.2rem 1.2rem;
 `;
 

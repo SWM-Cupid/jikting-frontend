@@ -162,9 +162,14 @@ export const EditProfile = () => {
     }
     formData.append('memberProfileUpdateRequest', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
-    await fetchEditProfile(formData);
-    setModalMessage('회원정보 변경이 완료되었습니다.');
-    setModalOpen(true);
+    try {
+      await fetchEditProfile(formData);
+      setModalMessage('회원정보 등록이 완료되었습니다.');
+      setModalOpen(true);
+    } catch (e) {
+      setModalMessage('올바른 이미지를 등록해주세요');
+      setModalOpen(true);
+    }
   };
 
   const getPersonalities = (selectedKeywords: string[]) => {
@@ -247,7 +252,7 @@ export const EditProfile = () => {
         />
         <Keyword title="취미" defaultKeywordList={hobbies} keywordList={HOBBY_LIST} getKeywordList={getHobbies} />
         <TextArea title="한줄 소개(선택)" {...register('description', { maxLength: 100 })} />
-        <Button title="수정 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
+        <Button title="등록 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
         {modalOpen ? (
           <ModalPortal>
             <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
