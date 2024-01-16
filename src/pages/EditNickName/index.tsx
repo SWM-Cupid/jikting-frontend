@@ -8,16 +8,15 @@ import { validNickNameCheck } from 'validation';
 import { fetchNickNameCheck } from 'api/signup';
 import { fetchEditNickName } from 'api/mypage';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
-import { useState } from 'react';
+import { useModal } from 'hooks/useModal';
 
 interface NickName {
   nickname: string;
 }
 
 export const EditNickName = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
   const location = useLocation();
   const navigate = useNavigate();
   const {
@@ -27,14 +26,14 @@ export const EditNickName = () => {
   } = useForm<NickName>({ mode: 'onTouched', defaultValues: { nickname: location.state.nickname } });
 
   const handleCloseModalClick = () => {
-    setModalOpen(false);
+    closeModal();
     navigate(-1);
   };
 
   const onSubmit: SubmitHandler<NickName> = async (data: NickName) => {
     try {
       await fetchEditNickName(data);
-      setModalOpen(true);
+      openModal();
     } catch {
       alert('오류!');
     }
@@ -56,11 +55,7 @@ export const EditNickName = () => {
           <Button disabled={true} background="#cccccc" title="변경하기" />
         )}
       </ButtonWrapper>
-      {modalOpen ? (
-        <ModalPortal>
-          <Modal title="닉네임 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} />
-        </ModalPortal>
-      ) : null}
+      {isOpen ? <Modal title="닉네임 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick} /> : null}
     </EditNickNameWrapper>
   );
 };

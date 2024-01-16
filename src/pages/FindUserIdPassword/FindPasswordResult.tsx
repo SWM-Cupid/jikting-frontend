@@ -5,10 +5,9 @@ import { fetchResetPassword } from 'api/findUserInfo';
 import { useForm } from 'react-hook-form';
 import { validPasswordCheck } from 'validation';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
 import { theme } from 'styles/theme';
+import { useModal } from 'hooks/useModal';
 
 interface Password {
   password: string;
@@ -23,14 +22,10 @@ export const FindPasswordResult = ({ username }: { username: string }) => {
     formState: { errors, isValid },
   } = useForm<Password>();
   const navigate = useNavigate();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
+  const handleCloseModalClick = () => {
+    closeModal();
     navigate('/');
   };
 
@@ -62,10 +57,8 @@ export const FindPasswordResult = ({ username }: { username: string }) => {
         })}
       />
       <Button type="submit" title="다음" background={isValid ? theme.colors.mainPink : '#CCCCCC'} />
-      {isModalOpen ? (
-        <ModalPortal>
-          <Modal title="비밀번호 변경이 완료되었습니다." handleButtonClick={closeModal}></Modal>
-        </ModalPortal>
+      {isOpen ? (
+        <Modal title="비밀번호 변경이 완료되었습니다." handleButtonClick={handleCloseModalClick}></Modal>
       ) : null}
     </S.FindPasswordWrapper>
   );

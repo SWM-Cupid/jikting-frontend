@@ -7,9 +7,8 @@ import { useForm } from 'react-hook-form';
 import { validIdCheck, validPasswordCheck } from 'validation';
 import { useMutationLogin } from 'hooks/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
+import { useModal } from 'hooks/useModal';
 
 export const NormalLogin = () => {
   const {
@@ -20,7 +19,7 @@ export const NormalLogin = () => {
 
   const { mutateAsync } = useMutationLogin();
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
 
   const handleLoginClick = async (data: { [key: string]: string }) => {
     (document.activeElement as HTMLElement).blur();
@@ -29,7 +28,7 @@ export const NormalLogin = () => {
       await mutateAsync({ username, password });
       navigate('/main');
     } catch {
-      setOpenModal(true);
+      openModal();
     }
   };
 
@@ -45,9 +44,6 @@ export const NormalLogin = () => {
     navigate('/signup');
   };
 
-  const handleModalCloseClick = () => {
-    setOpenModal(false);
-  };
   return (
     <S.LoginWrapper>
       <Header title="로그인" previous />
@@ -78,10 +74,8 @@ export const NormalLogin = () => {
         <S.DivideLine />
         <Button title="회원가입" size="small" background="none" color="#666" onClick={handleSignUpClick}></Button>
       </S.SubButtonWrapper>
-      {openModal ? (
-        <ModalPortal>
-          <Modal title="아이디와 비밀번호를 확인해주세요" handleButtonClick={handleModalCloseClick} />
-        </ModalPortal>
+      {isOpen ? (
+        <Modal title="아이디와 비밀번호를 확인해주세요" handleMaskClick={closeModal} handleButtonClick={closeModal} />
       ) : null}
     </S.LoginWrapper>
   );

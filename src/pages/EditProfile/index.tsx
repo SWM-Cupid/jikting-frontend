@@ -12,9 +12,9 @@ import { validBirthCheck } from 'validation';
 import { Input } from 'components/Input';
 import { fetchEditProfile } from 'api/mypage';
 import { useQueryMyProfileInfo } from 'hooks/useMypageQuery';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useModal } from 'hooks/useModal';
 
 const MBTI_LIST = [
   'INTJ',
@@ -122,7 +122,7 @@ export const EditProfile = () => {
   const [personalities, setPersonalities] = useState<string[]>([]);
   const [hobbies, setHobbies] = useState<string[]>([]);
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
   const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
@@ -148,7 +148,7 @@ export const EditProfile = () => {
 
     if (personalities.length !== 3) {
       setModalMessage('성격을 3개 추가해주세요.');
-      setModalOpen(true);
+      openModal();
       return;
     }
 
@@ -165,10 +165,10 @@ export const EditProfile = () => {
     try {
       await fetchEditProfile(formData);
       setModalMessage('회원정보 등록이 완료되었습니다.');
-      setModalOpen(true);
+      openModal();
     } catch (e) {
       setModalMessage('올바른 이미지를 등록해주세요');
-      setModalOpen(true);
+      openModal();
     }
   };
 
@@ -185,7 +185,7 @@ export const EditProfile = () => {
   };
 
   const handleCloseModalClick = () => {
-    setModalOpen(false);
+    closeModal();
 
     if (modalMessage === '회원정보 등록이 완료되었습니다.') navigate('/mypage');
   };
@@ -253,11 +253,7 @@ export const EditProfile = () => {
         <Keyword title="취미" defaultKeywordList={hobbies} keywordList={HOBBY_LIST} getKeywordList={getHobbies} />
         <TextArea title="한줄 소개(선택)" {...register('description', { maxLength: 100 })} />
         <Button title="등록 완료" type="submit" size="large" background={theme.colors.mainPink} color="white" />
-        {modalOpen ? (
-          <ModalPortal>
-            <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
-          </ModalPortal>
-        ) : null}
+        {isOpen ? <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} /> : null}
       </S.EditProfileForm>
     );
   }

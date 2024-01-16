@@ -11,9 +11,9 @@ import {
   fetchFindPasswordSendCode,
   fetchFindPasswordVerificationCode,
 } from 'api/findUserInfo';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
 import { theme } from 'styles/theme';
+import { useModal } from 'hooks/useModal';
 
 export interface UserInfo {
   username: string;
@@ -32,7 +32,7 @@ export const AuthUser = ({
   moveNextStep: (nextStep: string, result?: string) => void;
 }) => {
   const [isSendCode, setIsSendCode] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
   const [modalMessage, setModalMessage] = useState('');
 
   const {
@@ -52,7 +52,7 @@ export const AuthUser = ({
   };
 
   const showErrorMessage = (message: string) => {
-    setModalOpen(true);
+    openModal();
     setModalMessage(message);
   };
 
@@ -90,10 +90,6 @@ export const AuthUser = ({
     showErrorMessage('인증번호가 일치하지 않습니다.');
   };
 
-  const handleCloseModalClick = () => {
-    setModalOpen(false);
-  };
-
   return (
     <S.FlexColumn>
       <Header previous />
@@ -118,11 +114,7 @@ export const AuthUser = ({
           background={isValid ? theme.colors.mainPink : '#CCCCCC'}
         />
       </S.Form>
-      {modalOpen ? (
-        <ModalPortal>
-          <Modal title={modalMessage} handleButtonClick={handleCloseModalClick} />
-        </ModalPortal>
-      ) : null}
+      {isOpen ? <Modal title={modalMessage} handleButtonClick={closeModal} /> : null}
     </S.FlexColumn>
   );
 };

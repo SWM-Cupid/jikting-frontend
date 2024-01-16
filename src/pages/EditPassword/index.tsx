@@ -6,10 +6,10 @@ import { validPasswordCheck } from 'validation';
 import { Button } from 'components/Button';
 import { theme } from 'styles/theme';
 import { useState } from 'react';
-import ModalPortal from 'components/Modal/ModalPortal';
 import { Modal } from 'components/Modal';
 import { useNavigate } from 'react-router-dom';
 import { fetchEditPassword } from 'api/mypage';
+import { useModal } from 'hooks/useModal';
 
 export interface SubmitData {
   password: string;
@@ -24,17 +24,17 @@ export const EditPassword = () => {
     getValues,
     formState: { errors, isValid },
   } = useForm<SubmitData>({ defaultValues: {}, mode: 'onTouched' });
-  const [openModal, setOpenModal] = useState(false);
+  const { isOpen, openModal, closeModal } = useModal();
   const [modalMessage, setModalMessage] = useState('');
   const navigate = useNavigate();
 
   const handleModalClose = () => {
     if (modalMessage === '비밀번호 변경이 완료되었습니다.') {
-      setOpenModal(false);
+      closeModal();
       navigate('/mypage');
       return;
     }
-    setOpenModal(false);
+    closeModal();
   };
 
   const onSubmit = async (data: SubmitData) => {
@@ -45,7 +45,7 @@ export const EditPassword = () => {
     } catch {
       setModalMessage('기존 비밀번호가 일치하지 않습니다.');
     } finally {
-      setOpenModal(true);
+      openModal();
     }
   };
   return (
@@ -83,11 +83,7 @@ export const EditPassword = () => {
         />
         <Button title="확인" background={isValid ? theme.colors.mainPink : '#CCCCCC'} />
       </S.Form>
-      {openModal ? (
-        <ModalPortal>
-          <Modal title={modalMessage} handleButtonClick={handleModalClose}></Modal>
-        </ModalPortal>
-      ) : null}
+      {isOpen ? <Modal title={modalMessage} handleMaskClick={closeModal} handleButtonClick={handleModalClose} /> : null}
     </S.EditPasswordWrapper>
   );
 };
