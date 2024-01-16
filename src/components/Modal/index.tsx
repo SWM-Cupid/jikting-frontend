@@ -1,27 +1,34 @@
 import { Button } from 'components/Button';
 import * as S from './style';
+import ModalPortal from './ModalPortal';
 
-interface Props {
-  title?: string;
-  children?: React.ReactNode;
+interface ModalProps {
+  title: string;
   handleMaskClick?(): void;
-  handleButtonClick?(): void;
+  handleButtonClick(): void;
 }
 
-export const Modal = ({ title, handleMaskClick, handleButtonClick }: Props) => {
+export const Modal = ({ title, handleMaskClick, handleButtonClick }: ModalProps) => {
   return (
-    <S.Mask onClick={handleMaskClick}>
+    <ModalPortal>
+      <S.Mask onClick={handleMaskClick} />
       <S.Wrapper>
         <S.Title>{title}</S.Title>
         <S.ButtonWrapper>
           <Button title="확인" size="large" background="#FF5680" onClick={handleButtonClick}></Button>
         </S.ButtonWrapper>
       </S.Wrapper>
-    </S.Mask>
+    </ModalPortal>
   );
 };
 
-export const ModalBottomSheet = ({ handleMaskClick, children }: Props) => {
+export const ModalBottomSheet = ({
+  handleMaskClick,
+  children,
+}: {
+  handleMaskClick(): void;
+  children: React.ReactNode;
+}) => {
   return (
     <>
       <S.Mask onClick={handleMaskClick} />
