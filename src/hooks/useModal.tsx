@@ -1,5 +1,3 @@
-import ModalPortal from 'components/Modal/ModalPortal';
-import * as S from 'components/Modal/style';
 import { useState } from 'react';
 
 export const useModal = () => {
@@ -14,14 +12,7 @@ export const useModal = () => {
   };
 
   return {
-    Modal: isOpen
-      ? ({ children }: { children: React.ReactNode }) => (
-          <ModalPortal>
-            <S.Mask onClick={closeModal} />
-            <S.Wrapper>{children}</S.Wrapper>
-          </ModalPortal>
-        )
-      : () => null,
+    isOpen,
     openModal,
     closeModal,
   };
