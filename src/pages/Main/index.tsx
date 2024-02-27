@@ -81,14 +81,14 @@ export const Main = () => {
         </S.TeamInfo>
 
         <S.SlideContainer ref={slideContainerRef}>
-          {members.map((member, idx) => {
-            return <SlideItem key={idx} member={member}></SlideItem>;
+          {members.map((member) => {
+            return <SlideItem key={member.nickname} member={member}></SlideItem>;
           })}
         </S.SlideContainer>
 
         <S.DotsWrapper>
           {members.map((member, idx) => (
-            <S.Dot key={member.nickname} selected={idx === selected ? true : false} />
+            <S.Dot key={member.nickname} selected={idx === selected} />
           ))}
         </S.DotsWrapper>
 
