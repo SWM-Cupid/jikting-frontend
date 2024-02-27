@@ -1,5 +1,5 @@
 import { FieldError, FieldErrorsImpl, FieldValues, Merge } from 'react-hook-form';
-import { css, styled } from 'styled-components';
+import { css, keyframes, styled } from 'styled-components';
 
 export const StyledInput = styled.input<{
   error: FieldError | Merge<FieldError, FieldErrorsImpl<FieldValues>> | undefined;
@@ -41,4 +41,24 @@ export const StyledChatInput = styled.input`
 export const FlexWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const bottomUp = keyframes`
+  from {
+    transform: translateY(80%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+`;
+
+export const InputWrapper = styled(FlexWrapper)<{ animate: 'bottomUp' | undefined }>`
+  ${({ animate }) =>
+    animate == 'bottomUp' &&
+    css`
+      animation-duration: 0.5s;
+      animation-name: ${bottomUp};
+    `};
 `;

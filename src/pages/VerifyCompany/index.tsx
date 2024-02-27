@@ -46,6 +46,7 @@ export const VerifyCompany = () => {
         <Input
           title="인증번호"
           error={errors.verificationCode}
+          animate={'bottomUp'}
           {...register('verificationCode', { required: true })}
         ></Input>
       )}
@@ -57,7 +58,7 @@ export const VerifyCompany = () => {
 
       <Button
         type="submit"
-        title={isSendCode ? '인증하기' : '인증완료'}
+        title={isSendCode ? '인증완료' : '인증하기'}
         background={isValid ? theme.colors.mainPink : theme.colors.buttonGrey}
       ></Button>
     </VerifyEmailWrapper>
