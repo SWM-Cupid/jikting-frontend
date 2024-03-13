@@ -29,11 +29,11 @@ export const SelectLogin = () => {
   return (
     <S.LoginWrapper>
       <S.LogoWrapper>
-        <S.Logo src={jikting} width="65%" />
+        <S.Logo src={jikting} width="200px" height="280px" />
       </S.LogoWrapper>
       <S.ButtonWrapper>
         <ImageButton onClick={handleKakaoLoginClick}>
-          <img src={kakao_login}></img>
+          <img src={kakao_login} width="300px" height="45px"></img>
         </ImageButton>
         <S.NormalLoginButton onClick={handleNormalLogin}>직팅 로그인</S.NormalLoginButton>
         <S.SubButtonWrapper>
